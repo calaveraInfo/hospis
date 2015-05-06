@@ -17,29 +17,9 @@
 		reply-destination-name="restResponse" correlation-key="JMSCorrelationID">
 		<int-jms:reply-listener/>
 	</int-jms:outbound-gateway>
-<!-- 
-	<int-jms:inbound-gateway connection-factory="jmsFactory"
-		request-destination-name="restRequest" request-channel="jmsInboundChannel" />
-
-	<int:channel id="jmsInboundChannel" />
-
-	<int:transformer expression="payload.toUpperCase()" input-channel="jmsInboundChannel" />
-	<amq:broker useJmx="true" persistent="false">
-		<amq:transportConnectors>
-			<amq:transportConnector uri="tcp://localhost:0" />
-		</amq:transportConnectors>
-	</amq:broker>
-	<beans profile="local">
-		<import resource="classpath:broker.xml"/>
-	</beans>
- -->
 
 	<amq:queue id="restRequest" physicalName="org.apache.activemq.spring.Test.spring.restRequests" />
 	<amq:queue id="restResponse" physicalName="org.apache.activemq.spring.Test.spring.restResponse" />
 	<amq:connectionFactory id="jmsFactory" brokerURL="tcp://localhost:1983" />
 
-	<beans profile="local">
-		<import resource="classpath:broker.xml"/>
-		<bean class="cz.cestadomu.hospis.core.lib.CoreLibConfiguration"/>
-	</beans>
 </beans>

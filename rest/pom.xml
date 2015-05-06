@@ -23,7 +23,7 @@
 
 	<profiles>
 		<profile>
-			<id>local</id>
+			<id>monolitic</id>
 			<modules>
 				<module>../mq</module>
 				<module>../core</module>

@@ -84,12 +84,14 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
 	</dependencies>
 	
 	<profiles>
 		<profile>
-			<id>local</id>
+			<id>monolitic</id>
+			<properties>
+				<spring.profiles.active>monolitic</spring.profiles.active>
+			</properties>
 			<dependencies>
 				<dependency>
 					<groupId>cz.cestadomu.hospis</groupId>
@@ -103,9 +105,20 @@
 				</dependency>
 			</dependencies>
 		</profile>
+		<profile>
+			<id>microservice</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active>microservice</spring.profiles.active>
+			</properties>
+		</profile>
 	</profiles>
 	
-	<!-- 
+	<!-- Spring boot plugin is propably needed for maven to spring profile translation
+	via resource filtering in application.properties (@spring.profiles.active@) at least
+	it's the case in Eclipse IDE -->
 	<build>
 		<plugins>
 			<plugin>
@@ -114,5 +127,5 @@
 			</plugin>
 		</plugins>
 	</build>
-	 -->
+	
 </project>
