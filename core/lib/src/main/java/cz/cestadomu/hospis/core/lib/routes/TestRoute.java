@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class TestRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
-		from("activemq:restRequest").transform().simple("x${body}x");
+		from(InboundGateway.TEST_PIPE).transform().simple("x${body}");
+		// .marshal().jaxb().wireTap("stream:out")
 	}
 }

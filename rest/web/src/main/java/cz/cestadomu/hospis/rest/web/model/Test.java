@@ -1,8 +1,12 @@
 package cz.cestadomu.hospis.rest.web.model;
 
+
 public class Test {
 	private long id;
 	private String content;
+
+	public Test() {
+	}
 
 	public Test(long id, String content) {
 		this.id = id;

@@ -15,27 +15,27 @@
 	</parent>
 
 	<dependencies>
-		<!-- 
-		Kvůli interface JMS specifikace je potřeba alespoň activemq-client, ale
-		kvůli možnosti používat schéma vm:localhost
-		Transport scheme NOT recognized: [vm]
-		<dependency>
+		<!--
+			Kvůli interface JMS specifikace je potřeba alespoň activemq-client, ale
+			kvůli možnosti používat schéma vm:localhost
+			Transport scheme NOT recognized: [vm]
+			<dependency>
 			<groupId>org.apache.activemq</groupId>
-		    <artifactId>activemq-all</artifactId>
-		    <version>5.10.1</version>
-		</dependency>
-		 -->
-		
+			<artifactId>activemq-all</artifactId>
+			<version>5.10.1</version>
+			</dependency>
+		-->
+
 		<dependency>
 			<groupId>org.apache.camel</groupId>
 			<artifactId>camel-core</artifactId>
 			<version>2.15.1</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>org.apache.camel</groupId>
-		    <artifactId>camel-spring-boot</artifactId>
-		    <version>2.15.1</version>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring-boot</artifactId>
+			<version>2.15.1</version>
 		</dependency>
 
 		<dependency>
@@ -43,16 +43,37 @@
 			<artifactId>activemq-camel</artifactId>
 			<version>5.10.1</version>
 		</dependency>
-		
-		<!-- 
-		Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
-		 -->
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jaxb</artifactId>
+			<version>2.15.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+			<version>2.15.1</version>
+		</dependency>
+
+		<!--
+			Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

@@ -20,6 +20,15 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
+	
 		<!-- 
 		Contains web related dependencies like @RestController, @RequestMapping etc.
 		 -->
@@ -116,14 +125,34 @@
 		</profile>
 	</profiles>
 	
-	<!-- Spring boot plugin is propably needed for maven to spring profile translation
-	via resource filtering in application.properties (@spring.profiles.active@) at least
-	it's the case in Eclipse IDE -->
 	<build>
 		<plugins>
 			<plugin>
+				<!-- Spring boot plugin is propably needed for maven to spring profile translation
+				via resource filtering in application.properties (@spring.profiles.active@) at least
+				it's the case in Eclipse IDE -->
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+			    <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>jaxb2-maven-plugin</artifactId>
+			    <executions>
+			        <execution>
+			            <goals>
+			                <goal>schemagen</goal>
+			            </goals>
+			            <phase>generate-resources</phase>
+			            <!-- 
+			            <configuration>
+			                <includes>
+			                    <include>cz/cestadomu/hospis/rest/web/model/*.java</include>
+			                </includes>
+			                <outputDirectory>${project.build.directory}/schemas</outputDirectory>
+			            </configuration>
+			             -->
+			        </execution>
+			    </executions>
 			</plugin>
 		</plugins>
 	</build>
