@@ -40,11 +40,16 @@
 	</bean>
 
 	<oxm:jaxb2-marshaller id="marshaller">
-		<oxm:class-to-be-bound name="cz.cestadomu.hospis.rest.web.model.Credentials"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Credentials"/>
 	</oxm:jaxb2-marshaller>
 
 	<amq:queue id="restRequest" physicalName="org.apache.activemq.spring.Test.spring.restRequests" />
 	<amq:queue id="restResponse" physicalName="org.apache.activemq.spring.Test.spring.restResponse" />
 	<amq:connectionFactory id="jmsFactory" brokerURL="tcp://localhost:1983" />
+	
+	<beans profile="monolitic">
+		<import resource="classpath:broker.xml"/>
+		<bean class="cz.cestadomu.hospis.core.lib.CoreLibConfiguration"/>
+	</beans>
 
 </beans>

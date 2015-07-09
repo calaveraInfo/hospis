@@ -14,32 +14,35 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.3.RELEASE</version>
+		<!-- There is pom for monolithic build at defaul parent path (whic is ..).
+		Set empty relative path to avoid warning. -->
+		<relativePath></relativePath>
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
-		<hospis.core.version>0.0.1-SNAPSHOT</hospis.core.version>
 	</properties>
+
+	<modules>
+		<module>model</module>
+		<module>lib</module>
+		<module>web</module>
+	</modules>
 	
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>cz.cestadomu.hospis</groupId>
 				<artifactId>core-lib</artifactId>
-				<version>${hospis.core.version}</version>
+				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>cz.cestadomu.hospis</groupId>
-				<artifactId>core-web</artifactId>
-				<version>${hospis.core.version}</version>
+				<artifactId>core-model</artifactId>
+				<version>${project.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<modules>
-		<module>lib</module>
-		<module>web</module>
-	</modules>
 
 </project>

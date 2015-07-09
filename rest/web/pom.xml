@@ -28,26 +28,26 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
 		</dependency>
-	
-		<!-- 
-		Contains web related dependencies like @RestController, @RequestMapping etc.
-		 -->
+
+		<!--
+			Contains web related dependencies like @RestController, @RequestMapping etc.
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
-		<!-- 
-		Contains integration related dependencies like @IntegrationComponentScan, @MessagingGateway etc.
-		 -->
+
+		<!--
+			Contains integration related dependencies like @IntegrationComponentScan, @MessagingGateway etc.
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-integration</artifactId>
 		</dependency>
-		
-		<!-- 
-		JMS related dependencies
-		 -->
+
+		<!--
+			JMS related dependencies
+		-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jms</artifactId>
@@ -56,45 +56,45 @@
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-jms</artifactId>
 		</dependency>
-		
-		<!-- 
-		ActiveMQ related dependencies
-		 -->
+
+		<!--
+			ActiveMQ related dependencies
+		-->
 		<dependency>
-		    <groupId>org.apache.activemq</groupId>
-		    <artifactId>activemq-spring</artifactId>
-		    <version>5.10.1</version>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-spring</artifactId>
+			<version>5.10.1</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-		
-		<!-- 
-		Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
-		 -->
+
+		<!--
+			Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		<!-- 
-		http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
-		74.1 Create a deployable war file
-		...
-		The final step in the process is to ensure that the embedded servlet container doesn’t
-		interfere with the servlet container to which the war file will be deployed. To do so, you
-		need to mark the embedded servlet container dependency as provided.
-		 -->
+
+		<!--
+			http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
+			74.1 Create a deployable war file
+			...
+			The final step in the process is to ensure that the embedded servlet container doesn’t
+			interfere with the servlet container to which the war file will be deployed. To do so, you
+			need to mark the embedded servlet container dependency as provided.
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<profiles>
 		<profile>
 			<id>monolitic</id>
@@ -105,14 +105,58 @@
 				<dependency>
 					<groupId>cz.cestadomu.hospis</groupId>
 					<artifactId>mq-lib</artifactId>
-					<version>0.0.1-SNAPSHOT</version>
 				</dependency>
 				<dependency>
 					<groupId>cz.cestadomu.hospis</groupId>
 					<artifactId>core-lib</artifactId>
-					<version>0.0.1-SNAPSHOT</version>
+				</dependency>
+				<dependency>
+					<groupId>cz.cestadomu.hospis</groupId>
+					<artifactId>core-model</artifactId>
 				</dependency>
 			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>unpack-core-model</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>unpack-dependencies</goal>
+								</goals>
+								<configuration>
+									<includeArtifactIds>core-model</includeArtifactIds>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.jvnet.jaxb2.maven2</groupId>
+						<artifactId>maven-jaxb2-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-core-model</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<schemaDirectory>${project.build.directory}/dependency/schema</schemaDirectory>
+							<schemaIncludes>
+								<include>**/*.xsd</include>
+							</schemaIncludes>
+							<bindingDirectory>src/main/resources/bindings</bindingDirectory>
+							<bindingIncludes>
+								<bindingInclude>global-bindings.xjb</bindingInclude>
+							</bindingIncludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 		<profile>
 			<id>microservice</id>
@@ -124,37 +168,19 @@
 			</properties>
 		</profile>
 	</profiles>
-	
+
 	<build>
 		<plugins>
-			<plugin>
-				<!-- Spring boot plugin is propably needed for maven to spring profile translation
+			<!--
+				<plugin>
+				Spring boot plugin is propably needed for maven to spring profile translation
 				via resource filtering in application.properties (@spring.profiles.active@) at least
-				it's the case in Eclipse IDE -->
+				it's the case in Eclipse IDE
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-			    <groupId>org.codehaus.mojo</groupId>
-			    <artifactId>jaxb2-maven-plugin</artifactId>
-			    <executions>
-			        <execution>
-			            <goals>
-			                <goal>schemagen</goal>
-			            </goals>
-			            <phase>generate-resources</phase>
-			            <!-- 
-			            <configuration>
-			                <includes>
-			                    <include>cz/cestadomu/hospis/rest/web/model/*.java</include>
-			                </includes>
-			                <outputDirectory>${project.build.directory}/schemas</outputDirectory>
-			            </configuration>
-			             -->
-			        </execution>
-			    </executions>
-			</plugin>
+				</plugin>
+			-->
 		</plugins>
 	</build>
-	
+
 </project>

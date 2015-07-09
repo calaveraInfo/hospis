@@ -8,27 +8,32 @@ import javax.jms.ObjectMessage;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.jms.support.converter.MarshallingMessageConverter;
 import org.springframework.jms.support.converter.MessageConversionException;
 
 public class MyMarshallingMessageConverter extends MarshallingMessageConverter {
+	@SuppressWarnings("unused")
+	private static final Logger log = LoggerFactory.getLogger(MyMarshallingMessageConverter.class);
 
 	@Override
-	public Message toMessage(Object object, Session session) throws JMSException, MessageConversionException {
+	public Message toMessage(final Object object, final Session session) throws JMSException, MessageConversionException {
 		try {
 			return super.toMessage(object, session);
-		} catch (Exception e) {
+		} catch (final Exception e) {
+			// log.warn("Neni mozne serializovat.", e);
 			return session.createObjectMessage((Serializable) object);
 		}
 	}
 
 	@Override
-	public Object fromMessage(Message message) throws JMSException, MessageConversionException {
+	public Object fromMessage(final Message message) throws JMSException, MessageConversionException {
 		try {
 			return super.fromMessage(message);
-		} catch (IllegalArgumentException e) {
+		} catch (final IllegalArgumentException e) {
 			return ((ObjectMessage) message).getObject();
-		} catch (MessageConversionException e) {
+		} catch (final MessageConversionException e) {
 			return ((TextMessage) message).getText();
 		}
 	}

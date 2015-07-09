@@ -19,14 +19,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 
+import cz.cestadomu.hospis.model.Credentials;
 import cz.cestadomu.hospis.rest.web.gateway.AuthenticationGateway;
-import cz.cestadomu.hospis.rest.web.model.Credentials;
 
 @SpringBootApplication
 @ImportResource("classpath:integration.xml")
 public class RestApplication extends SpringBootServletInitializer {
 	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
 		return application.sources(RestApplication.class);
 	}
 
@@ -40,16 +40,17 @@ public class RestApplication extends SpringBootServletInitializer {
 		@Autowired
 		private AuthenticationGateway authenticationGateway;
 
-		protected void configure(HttpSecurity http) throws Exception {
+		@Override
+		protected void configure(final HttpSecurity http) throws Exception {
 			http.authorizeRequests().anyRequest().authenticated().and().httpBasic();
 		}
 
 		@Override
-		public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		public void configure(final AuthenticationManagerBuilder auth) throws Exception {
 			auth.authenticationProvider(new AuthenticationProvider() {
 
 				@Override
-				public boolean supports(Class authentication) {
+				public boolean supports(@SuppressWarnings("rawtypes") final Class authentication) {
 					if (UsernamePasswordAuthenticationToken.class.isAssignableFrom(authentication)) {
 						return true;
 					} else {
@@ -59,10 +60,10 @@ public class RestApplication extends SpringBootServletInitializer {
 
 				@Override
 				public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
-					UsernamePasswordAuthenticationToken typedAuthentication = (UsernamePasswordAuthenticationToken) authentication;
-					System.out.println(authenticationGateway.authenticate(new Credentials(authentication.getPrincipal().toString(), authentication
-							.getCredentials().toString())));
-					if (true) {
+					final Credentials credentials = new Credentials();
+					credentials.setUsername(authentication.getPrincipal().toString());
+					credentials.setPassword(authentication.getCredentials().toString());
+					if (ApplicationSecurity.this.authenticationGateway.authenticate(credentials)) {
 						return new Authentication() {
 
 							@Override
@@ -71,7 +72,7 @@ public class RestApplication extends SpringBootServletInitializer {
 							}
 
 							@Override
-							public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
+							public void setAuthenticated(final boolean isAuthenticated) throws IllegalArgumentException {
 
 							}
 

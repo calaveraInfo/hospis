@@ -26,25 +26,25 @@ public class MainRouter {
 
 	/**
 	 * SEDA is used instead of direct because the controll messages are sent
-	 * also during application context initialization when this listener might
-	 * not be initialized yet.
+	 * also during application context initialization when this router might not
+	 * be initialized yet.
 	 */
 	public static final String DYNAMIC_ROUTER_CONTROLL_CHANNEL = "seda:dynamicRouter";
 
-	private List<RoutingItem> routes = new LinkedList<MainRouter.RoutingItem>();
+	private final List<RoutingItem> routes = new LinkedList<MainRouter.RoutingItem>();
 
 	final SchemaFactory factory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
 	@RecipientList
 	@Consume(uri = InboundGateway.XML_MESSAGE_CHANNEL)
-	public String route(Document body) {
+	public String route(final Document body) {
 		log.debug("Routing message.");
-		for (RoutingItem routingItem : routes) {
+		for (final RoutingItem routingItem : this.routes) {
 			try {
 				routingItem.getValidator().validate(new DOMSource(body));
 				log.debug("Route {} accepts message.", routingItem.routeTo);
 				return routingItem.getRouteTo();
-			} catch (Exception e) {
+			} catch (final Exception e) {
 				log.trace("Route {} doesn't accept message.", routingItem.routeTo, e);
 			}
 		}
@@ -52,32 +52,32 @@ public class MainRouter {
 	}
 
 	@Consume(uri = DYNAMIC_ROUTER_CONTROLL_CHANNEL)
-	public void recieveRoutingUpdate(@Header(ROUTE_TO_HEADER_NAME) String routeTo, Document schema) {
+	public void recieveRoutingUpdate(@Header(ROUTE_TO_HEADER_NAME) final String routeTo, final Document schema) {
 		log.info("Recieved dynamic routing configuration message.");
-		synchronized (routes) {
-			routes.add(new RoutingItem(routeTo, schema));
+		synchronized (this.routes) {
+			this.routes.add(new RoutingItem(routeTo, schema));
 		}
 	}
 
 	private class RoutingItem {
-		private String routeTo;
-		private Validator validator;
+		private final String routeTo;
+		private final Validator validator;
 
-		public RoutingItem(String routeTo, Document schema) {
+		public RoutingItem(final String routeTo, final Document schema) {
 			this.routeTo = routeTo;
 			try {
-				this.validator = factory.newSchema(new DOMSource(schema)).newValidator();
-			} catch (SAXException e) {
-				throw new RuntimeException("New route init failed.", e);
+				this.validator = MainRouter.this.factory.newSchema(new DOMSource(schema)).newValidator();
+			} catch (final SAXException e) {
+				throw new RuntimeException("New route item init failed.", e);
 			}
 		}
 
 		public Validator getValidator() {
-			return validator;
+			return this.validator;
 		}
 
 		public String getRouteTo() {
-			return routeTo;
+			return this.routeTo;
 		}
 
 	}
