@@ -9,7 +9,7 @@ import cz.cestadomu.hospis.core.lib.CoreLibConfiguration;
 @SpringBootApplication
 public class CoreApplication extends SpringBootServletInitializer {
 	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+	protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
 		return application.sources(CoreApplication.class, CoreLibConfiguration.class);
 	}
 

@@ -13,12 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import cz.cestadomu.hospis.core.lib.Transformation;
 import cz.cestadomu.hospis.model.Schema;
 
 @Component
 public class AuthenticationRoute extends RouteBuilder {
 	private static final Logger log = LoggerFactory.getLogger(AuthenticationRoute.class);
-	private static final String AUTHENTICATION_CHANNEL = "direct:authentication";
+	protected static final String AUTHENTICATION_CHANNEL = "direct:authentication";
 
 	@Autowired
 	private ProducerTemplate producerTemplate;
@@ -28,7 +29,8 @@ public class AuthenticationRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from(AUTHENTICATION_CHANNEL).transform().constant(Boolean.TRUE);
+		from(AUTHENTICATION_CHANNEL).to("xslt:" + Transformation.AUTHENTICATION)
+				.to("spring-ws:https://intuo.cestadomu.cz/webservice/service3auth.asmx?soapAction=http://digres.cz/Login").transform().constant(Boolean.TRUE);
 	}
 
 	@PostConstruct
