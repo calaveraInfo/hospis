@@ -47,7 +47,7 @@
 	<amq:queue id="restResponse" physicalName="org.apache.activemq.spring.Test.spring.restResponse" />
 	<amq:connectionFactory id="jmsFactory" brokerURL="tcp://localhost:1983" />
 	
-	<beans profile="monolitic">
+	<beans profile="monolith">
 		<import resource="classpath:broker.xml"/>
 		<bean class="cz.cestadomu.hospis.core.lib.CoreLibConfiguration"/>
 	</beans>
