@@ -16,7 +16,7 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.3.RELEASE</version>
 		<!-- There is pom for monolithic build at defaul parent path (whic is ..).
-		Set empty relative path to avoid warning. -->
+			Set empty relative path to avoid warning. -->
 		<relativePath></relativePath>
 	</parent>
 
@@ -29,9 +29,26 @@
 		<jaxb2.plugin.version>0.11.0</jaxb2.plugin.version>
 	</properties>
 
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${dependency.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.jvnet.jaxb2.maven2</groupId>
+					<artifactId>maven-jaxb2-plugin</artifactId>
+					<version>${jaxb2.plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
 	<profiles>
 		<profile>
-			<id>monolitic</id>
+			<id>monolith</id>
 			<properties>
 				<core.version>0.0.1-SNAPSHOT</core.version>
 				<mq.version>0.0.1-SNAPSHOT</mq.version>
@@ -55,22 +72,25 @@
 					</dependency>
 				</dependencies>
 			</dependencyManagement>
-			<build>
-				<pluginManagement>
-					<plugins>
-						<plugin>
-							<groupId>org.apache.maven.plugins</groupId>
-					        <artifactId>maven-dependency-plugin</artifactId>
-					        <version>${dependency.plugin.version}</version>
-						</plugin>
-						<plugin>
-				            <groupId>org.jvnet.jaxb2.maven2</groupId>
-                			<artifactId>maven-jaxb2-plugin</artifactId>
-					        <version>${jaxb2.plugin.version}</version>
-						</plugin>
-					</plugins>
-				</pluginManagement>
-			</build>
+		</profile>
+		
+		<profile>
+			<id>microservice</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<core.version>0.0.1-SNAPSHOT</core.version>
+			</properties>
+			<dependencyManagement>
+				<dependencies>
+					<dependency>
+						<groupId>cz.cestadomu.hospis</groupId>
+						<artifactId>core-model</artifactId>
+						<version>${core.version}</version>
+					</dependency>
+				</dependencies>
+			</dependencyManagement>
 		</profile>
 	</profiles>
 </project>
