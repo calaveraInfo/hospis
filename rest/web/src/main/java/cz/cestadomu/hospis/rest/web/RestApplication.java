@@ -25,6 +25,10 @@ import cz.cestadomu.hospis.rest.web.authentication.HospisAuthenticationProvider;
 @SpringBootApplication
 @ImportResource("classpath:integration.xml")
 public class RestApplication extends SpringBootServletInitializer {
+	// TODO dynamicke urcovani portu mq, aby mohly testy probihat pri zapnutem
+	// kontejneru.
+	// TODO Odstranit vlastni implementaci marshalling message converteru, az
+	// nebude potreba posilat binarni objekty.
 	@Override
 	protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
 		return application.sources(RestApplication.class);

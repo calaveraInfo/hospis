@@ -41,6 +41,7 @@
 
 	<oxm:jaxb2-marshaller id="marshaller">
 		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Credentials"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.AuthenticationResult"/>
 	</oxm:jaxb2-marshaller>
 
 	<amq:queue id="restRequest" physicalName="org.apache.activemq.spring.Test.spring.restRequests" />

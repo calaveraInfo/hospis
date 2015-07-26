@@ -33,7 +33,7 @@ public class HospisAuthenticationProvider implements AuthenticationProvider {
 		final Credentials credentials = new Credentials();
 		credentials.setUsername(authentication.getPrincipal().toString());
 		credentials.setPassword(authentication.getCredentials().toString());
-		if (this.authenticationGateway.authenticate(credentials)) {
+		if (this.authenticationGateway.authenticate(credentials).isAuthenticated()) {
 			return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(),
 					Arrays.asList(new SimpleGrantedAuthority("USER")));
 		}

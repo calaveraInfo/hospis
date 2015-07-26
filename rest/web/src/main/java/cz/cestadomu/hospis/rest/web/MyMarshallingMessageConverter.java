@@ -22,6 +22,7 @@ public class MyMarshallingMessageConverter extends MarshallingMessageConverter {
 		try {
 			return super.toMessage(object, session);
 		} catch (final Exception e) {
+			e.printStackTrace();
 			// log.warn("Neni mozne serializovat.", e);
 			return session.createObjectMessage((Serializable) object);
 		}
@@ -32,8 +33,10 @@ public class MyMarshallingMessageConverter extends MarshallingMessageConverter {
 		try {
 			return super.fromMessage(message);
 		} catch (final IllegalArgumentException e) {
+			e.printStackTrace();
 			return ((ObjectMessage) message).getObject();
 		} catch (final MessageConversionException e) {
+			e.printStackTrace();
 			return ((TextMessage) message).getText();
 		}
 	}

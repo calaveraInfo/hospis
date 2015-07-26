@@ -30,7 +30,8 @@ public class AuthenticationRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		from(AUTHENTICATION_CHANNEL).to("xslt:" + Transformation.AUTHENTICATION)
-				.to("spring-ws:https://intuo.cestadomu.cz/webservice/service3auth.asmx?soapAction=http://digres.cz/Login").transform().constant(Boolean.TRUE);
+				.to("spring-ws:https://intuo.cestadomu.cz/webservice/service3auth.asmx?soapAction=http://digres.cz/Login")
+				.to("xslt:" + Transformation.AUTHENTICATION_RESULT).wireTap("stream:out");
 	}
 
 	@PostConstruct
