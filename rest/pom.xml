@@ -3,31 +3,96 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.3.RELEASE</version>
+		<!-- There is pom for monolithic build at defaul parent path (which is ..), so
+			 we need to set empty relative path to avoid warning. -->
+		<relativePath></relativePath>
+	</parent>
+
 	<groupId>cz.cestadomu.hospis</groupId>
 	<artifactId>rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>Hospis rest API</name>
-	<description>Thin layer for translation between REST API and messaging platform</description>
+	<name>Hospis REST API root parent</name>
+	<description>Root parent of module that serves in Hospis project as a thin layer for translation between public REST API and core module.</description>
+	<url>https://github.com/calaveraInfo/hospis/wiki</url>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.3.RELEASE</version>
-		<!-- There is pom for monolithic build at defaul parent path (whic is ..).
-			Set empty relative path to avoid warning. -->
-		<relativePath></relativePath>
-	</parent>
+	<licenses>
+		<license>
+			<name>GNU General Public License, Version 2</name>
+			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<organization>
+		<name>Cesta domů, z.ú.</name>
+		<url>http://cestadomu.cz</url>
+	</organization>
+
+	<developers>
+		<developer>
+			<id>fre</id>
+			<name>František Řezáč</name>
+			<email>frantisek.rezac@calavera.info</email>
+			<url>http://calavera.info</url>
+			<roles>
+				<role>architect</role>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Prague</timezone>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>JIRA</system>
+		<url>https://cestadomu.atlassian.net</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>Bamboo</system>
+		<url>https://cestadomu.atlassian.net</url>
+	</ciManagement>
+
+	<scm>
+		<connection>scm:git:https://github.com/calaveraInfo/hospis.git</connection>
+		<developerConnection>scm:git:https://github.com/calaveraInfo/hospis.git</developerConnection>
+		<url>https://github.com/calaveraInfo/hospis</url>
+	</scm>
+
+	<distributionManagement>
+		<site>
+			<id>fake.website</id>
+			<name>Fake Website</name>
+			<url>scp://example.com</url>
+		</site>
+	</distributionManagement>
 
 	<modules>
 		<module>web</module>
 	</modules>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dependency.plugin.version>2.10</dependency.plugin.version>
 		<jaxb2.plugin.version>0.11.0</jaxb2.plugin.version>
+		<site.plugin.version>3.4</site.plugin.version>
+		<activemq.version>5.10.1</activemq.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-spring</artifactId>
+				<version>${activemq.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<build>
 		<pluginManagement>
@@ -41,6 +106,18 @@
 					<groupId>org.jvnet.jaxb2.maven2</groupId>
 					<artifactId>maven-jaxb2-plugin</artifactId>
 					<version>${jaxb2.plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${site.plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.apache.maven.doxia</groupId>
+							<artifactId>doxia-module-markdown</artifactId>
+							<version>1.6</version>
+						</dependency>
+					</dependencies>
 				</plugin>
 			</plugins>
 		</pluginManagement>

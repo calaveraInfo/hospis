@@ -1,0 +1,9 @@
+<project>
+	<body>
+		<menu ref="parent" />
+		<menu name="Documentation">
+			<item name="Test" href="test.html" />
+		</menu>
+		<menu ref="reports" />
+	</body>
+</project>
