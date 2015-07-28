@@ -14,8 +14,8 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.2.3.RELEASE</version>
-		<!-- There is pom for monolithic build at defaul parent path (whic is ..).
-		Set empty relative path to avoid warning. -->
+		<!-- There is pom for monolithic build at defaul parent path (which is ..), so
+			 we need to set empty relative path to avoid warning. -->
 		<relativePath></relativePath>
 	</parent>
 

@@ -6,7 +6,8 @@
 	<artifactId>rest-web</artifactId>
 	<packaging>war</packaging>
 
-	<name>Hospis rest API web</name>
+	<name>Hospis REST API</name>
+	<description>Module that serves in Hospis project as a thin layer for translation between public REST API and core module.</description>
 
 	<parent>
 		<groupId>cz.cestadomu.hospis</groupId>
@@ -14,15 +15,18 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
 	<dependencies>
+		<!--
+			Contains Spring security dependencies.
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
+
+		<!--
+			Contains object to xml conversion libraries.
+		-->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-oxm</artifactId>
@@ -62,9 +66,11 @@
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-spring</artifactId>
-			<version>5.10.1</version>
 		</dependency>
 
+		<!--
+			Actuator provides generic web application operational tools like monitoring, auditing etc.
+		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -93,6 +99,9 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!--
+			Contains Hospis core module data model.
+		-->
 		<dependency>
 			<groupId>cz.cestadomu.hospis</groupId>
 			<artifactId>core-model</artifactId>
