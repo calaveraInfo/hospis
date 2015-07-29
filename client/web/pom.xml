@@ -2,23 +2,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<parent>
 		<groupId>cz.cestadomu.hospis</groupId>
-		<artifactId>core</artifactId>
+		<artifactId>client</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>core-model</artifactId>
-	<packaging>jar</packaging>
+	<artifactId>client-web</artifactId>
+	<packaging>war</packaging>
+	<name>Hospis browser client</name>
+	<description>Referential implementation of browser client for Hospis.</description>
+	<url>https://github.com/calaveraInfo/hospis/wiki</url>
 
-	<name>Hospis core data model</name>
-
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
+	<scm>
+		<url>https://github.com/calaveraInfo/hospis/tree/master/client/web</url>
+	</scm>
 
 </project>

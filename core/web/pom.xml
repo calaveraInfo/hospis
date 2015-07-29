@@ -6,7 +6,7 @@
 	<artifactId>core-web</artifactId>
 	<packaging>war</packaging>
 
-	<name>Hospis core integration web</name>
+	<name>Hospis core web</name>
 
 	<parent>
 		<groupId>cz.cestadomu.hospis</groupId>

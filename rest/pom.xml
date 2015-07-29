@@ -18,7 +18,7 @@
 	<packaging>pom</packaging>
 
 	<name>Hospis REST API root parent</name>
-	<description>Root parent of module that serves in Hospis project as a thin layer for translation between public REST API and core module.</description>
+	<description>Root parent of this Maven reactor, see submodules.</description>
 	<url>https://github.com/calaveraInfo/hospis/wiki</url>
 
 	<licenses>
@@ -61,11 +61,12 @@
 	<scm>
 		<connection>scm:git:https://github.com/calaveraInfo/hospis.git</connection>
 		<developerConnection>scm:git:https://github.com/calaveraInfo/hospis.git</developerConnection>
-		<url>https://github.com/calaveraInfo/hospis</url>
+		<url>https://github.com/calaveraInfo/hospis/tree/master/rest</url>
 	</scm>
 
 	<distributionManagement>
 		<site>
+			<!-- This has to be here to allow "mvn clean site site:stage -DstagingDirectory=" -->
 			<id>fake.website</id>
 			<name>Fake Website</name>
 			<url>scp://example.com</url>
@@ -81,7 +82,9 @@
 		<dependency.plugin.version>2.10</dependency.plugin.version>
 		<jaxb2.plugin.version>0.11.0</jaxb2.plugin.version>
 		<site.plugin.version>3.4</site.plugin.version>
+		<war.plugin.version>2.5</war.plugin.version>
 		<activemq.version>5.10.1</activemq.version>
+		<doxia.markdown.version>1.6</doxia.markdown.version>
 	</properties>
 
 	<dependencyManagement>
@@ -103,6 +106,11 @@
 					<version>${dependency.plugin.version}</version>
 				</plugin>
 				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${war.plugin.version}</version>
+				</plugin>
+				<plugin>
 					<groupId>org.jvnet.jaxb2.maven2</groupId>
 					<artifactId>maven-jaxb2-plugin</artifactId>
 					<version>${jaxb2.plugin.version}</version>
@@ -115,7 +123,7 @@
 						<dependency>
 							<groupId>org.apache.maven.doxia</groupId>
 							<artifactId>doxia-module-markdown</artifactId>
-							<version>1.6</version>
+							<version>${doxia.markdown.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -129,6 +137,7 @@
 			<properties>
 				<core.version>0.0.1-SNAPSHOT</core.version>
 				<mq.version>0.0.1-SNAPSHOT</mq.version>
+				<client.version>0.0.1-SNAPSHOT</client.version>
 			</properties>
 			<dependencyManagement>
 				<dependencies>
@@ -146,6 +155,12 @@
 						<groupId>cz.cestadomu.hospis</groupId>
 						<artifactId>mq-lib</artifactId>
 						<version>${mq.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>cz.cestadomu.hospis</groupId>
+						<artifactId>client-web</artifactId>
+						<version>${client.version}</version>
+						<type>war</type>
 					</dependency>
 				</dependencies>
 			</dependencyManagement>

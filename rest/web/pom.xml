@@ -3,17 +3,21 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>rest-web</artifactId>
-	<packaging>war</packaging>
-
-	<name>Hospis REST API</name>
-	<description>Module that serves in Hospis project as a thin layer for translation between public REST API and core module.</description>
-
 	<parent>
 		<groupId>cz.cestadomu.hospis</groupId>
 		<artifactId>rest</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+
+	<artifactId>rest-web</artifactId>
+	<packaging>war</packaging>
+	<name>Hospis REST API</name>
+	<description>Module that serves in Hospis project as a thin layer for translation between public REST API and core module.</description>
+	<url>https://github.com/calaveraInfo/hospis/wiki</url>
+
+	<scm>
+		<url>https://github.com/calaveraInfo/hospis/tree/master/rest/web</url>
+	</scm>
 
 	<dependencies>
 		<!--
@@ -123,6 +127,12 @@
 					<groupId>cz.cestadomu.hospis</groupId>
 					<artifactId>core-lib</artifactId>
 				</dependency>
+				<dependency>
+					<groupId>cz.cestadomu.hospis</groupId>
+					<artifactId>client-web</artifactId>
+					<type>war</type>
+					<scope>runtime</scope>
+				</dependency>
 			</dependencies>
 		</profile>
 		<profile>
@@ -138,6 +148,12 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<dependentWarExcludes>WEB-INF/web.xml</dependentWarExcludes>
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>

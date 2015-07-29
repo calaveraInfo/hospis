@@ -9,11 +9,21 @@
 	<packaging>pom</packaging>
 
 	<name>Monolithic Hospis build</name>
+	
+	<distributionManagement>
+		<site>
+			<!-- This has to be here to allow "mvn clean site site:stage -DstagingDirectory=" -->
+			<id>fake.website</id>
+			<name>Fake Website</name>
+			<url>scp://example.com</url>
+		</site>
+	</distributionManagement>
 
 	<modules>
 		<module>mq</module>
 		<module>core</module>
 		<module>rest</module>
+		<module>client</module>
 	</modules>
  
 </project>
