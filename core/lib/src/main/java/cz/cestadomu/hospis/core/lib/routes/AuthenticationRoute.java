@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -26,12 +27,16 @@ public class AuthenticationRoute extends RouteBuilder {
 
 	@Autowired
 	private ApplicationContext context;
+  
+  @Value("${endpoint.authentication}")
+  private String authenticationChannel;
+  
+  @Value("${ws.intuo.login}")
+  private String loginChannel;
 
 	@Override
 	public void configure() throws Exception {
-		from(AUTHENTICATION_CHANNEL).to("xslt:" + Transformation.AUTHENTICATION)
-				.to("spring-ws:https://intuo.cestadomu.cz/webservice/service3auth.asmx?soapAction=http://digres.cz/Login")
-				.to("xslt:" + Transformation.AUTHENTICATION_RESULT).wireTap("stream:out");
+		from(authenticationChannel).to("xslt:" + Transformation.AUTHENTICATION).to(loginChannel).to("xslt:" + Transformation.AUTHENTICATION_RESULT);
 	}
 
 	@PostConstruct
@@ -41,4 +46,5 @@ public class AuthenticationRoute extends RouteBuilder {
 				IOUtils.toString(this.context.getResource("classpath:" + Schema.CREDENTIALS).getInputStream()), MainRouter.ROUTE_TO_HEADER_NAME,
 				AUTHENTICATION_CHANNEL);
 	}
+
 }

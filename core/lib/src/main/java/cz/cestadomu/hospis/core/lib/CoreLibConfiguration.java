@@ -3,8 +3,10 @@ package cz.cestadomu.hospis.core.lib;
 import org.apache.activemq.camel.component.ActiveMQComponent;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
+@PropertySource("classpath:/core.properties")
 public class CoreLibConfiguration {
 	@Bean
 	public ActiveMQComponent activemq() {
