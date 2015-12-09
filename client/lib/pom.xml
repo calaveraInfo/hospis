@@ -17,5 +17,47 @@
 	<scm>
 		<url>https://github.com/calaveraInfo/hospis/tree/master/client/lib</url>
 	</scm>
+	
+	<properties>
+		<frontend.plugin.version>0.0.26</frontend.plugin.version>
+		<node.version>v5.1.0</node.version>
+		<npm.version>3.3.12</npm.version>
+	</properties>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>${frontend.plugin.version}</version>
+				<configuration>
+					<workingDirectory>frontend</workingDirectory>
+					<installDirectory>node-executable</installDirectory>
+					<nodeVersion>${node.version}</nodeVersion>
+					<npmVersion>${npm.version}</npmVersion>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install node and npm</id>
+						<goals>
+							<goal>install-node-and-npm</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>npm install</id>
+						<goals>
+							<goal>npm</goal>
+						</goals>
+					</execution>
+					<execution>
+					    <id>webpack build</id>
+					    <goals>
+					        <goal>webpack</goal>
+					    </goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
