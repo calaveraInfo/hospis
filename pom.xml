@@ -24,6 +24,7 @@
 		<module>core</module>
 		<module>rest</module>
 		<module>client</module>
+		<module>bundle</module>
 	</modules>
  
 </project>

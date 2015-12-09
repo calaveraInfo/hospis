@@ -11,12 +11,48 @@
 
 	<artifactId>client-web</artifactId>
 	<packaging>war</packaging>
-	<name>Hospis browser client</name>
-	<description>Referential implementation of browser client for Hospis.</description>
+	<name>Hospis browser client web</name>
+	<description>Web application wrapper around browser client library</description>
 	<url>https://github.com/calaveraInfo/hospis/wiki</url>
 
 	<scm>
 		<url>https://github.com/calaveraInfo/hospis/tree/master/client/web</url>
 	</scm>
 
+	<dependencies>
+		<dependency>
+			<groupId>cz.cestadomu.hospis</groupId>
+			<artifactId>client-lib</artifactId>
+		</dependency>
+		
+		<!--
+			Actuator provides generic web application operational tools like monitoring, auditing etc.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<!--
+			Contains web related dependencies like @RestController, @RequestMapping etc.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!--
+			http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
+			74.1 Create a deployable war file
+			...
+			The final step in the process is to ensure that the embedded servlet container doesn’t
+			interfere with the servlet container to which the war file will be deployed. To do so, you
+			need to mark the embedded servlet container dependency as provided.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 </project>

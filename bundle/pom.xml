@@ -13,12 +13,12 @@
 	</parent>
 
 	<groupId>cz.cestadomu.hospis</groupId>
-	<artifactId>client</artifactId>
+	<artifactId>bundle</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>war</packaging>
 
-	<name>Hospis browser client root parent</name>
-	<description>Root parent of this Maven reactor, see submodules.</description>
+	<name>Hospis all-in-one bundle</name>
+	<description>Module for bundling all Hospis modules to single monolith</description>
 	<url>https://github.com/calaveraInfo/hospis/wiki</url>
 
 	<licenses>
@@ -61,7 +61,7 @@
 	<scm>
 		<connection>scm:git:https://github.com/calaveraInfo/hospis.git</connection>
 		<developerConnection>scm:git:https://github.com/calaveraInfo/hospis.git</developerConnection>
-		<url>https://github.com/calaveraInfo/hospis/tree/master/client</url>
+		<url>https://github.com/calaveraInfo/hospis/tree/master/bundle</url>
 	</scm>
 
 	<distributionManagement>
@@ -73,32 +73,90 @@
 		</site>
 	</distributionManagement>
 
-	<modules>
-		<module>lib</module>
-		<module>web</module>
-	</modules>
-
 	<properties>
-		<client.version>0.0.1-SNAPSHOT</client.version>
 		<doxia.markdown.version>1.6</doxia.markdown.version>
 		<site.plugin.version>3.4</site.plugin.version>
+		<war.plugin.version>2.5</war.plugin.version>
 		<java.version>1.8</java.version>
+		<core.version>0.0.1-SNAPSHOT</core.version>
+		<mq.version>0.0.1-SNAPSHOT</mq.version>
+		<rest.version>0.0.1-SNAPSHOT</rest.version>
+		<client.version>0.0.1-SNAPSHOT</client.version>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>cz.cestadomu.hospis</groupId>
+				<artifactId>core-lib</artifactId>
+				<version>${core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.cestadomu.hospis</groupId>
+				<artifactId>mq-lib</artifactId>
+				<version>${mq.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.cestadomu.hospis</groupId>
+				<artifactId>rest-lib</artifactId>
+				<version>${rest.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>cz.cestadomu.hospis</groupId>
 				<artifactId>client-lib</artifactId>
 				<version>${client.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>cz.cestadomu.hospis</groupId>
-				<artifactId>client-web</artifactId>
-				<version>${client.version}</version>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<dependencies>
+		<dependency>
+			<groupId>cz.cestadomu.hospis</groupId>
+			<artifactId>core-lib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cz.cestadomu.hospis</groupId>
+			<artifactId>mq-lib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cz.cestadomu.hospis</groupId>
+			<artifactId>rest-lib</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>cz.cestadomu.hospis</groupId>
+			<artifactId>client-lib</artifactId>
+		</dependency>
+	
+		<!--
+			Actuator provides generic web application operational tools like monitoring, auditing etc.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+		<!--
+			Contains web related dependencies like @RestController, @RequestMapping etc.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		<!--
+			http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
+			74.1 Create a deployable war file
+			...
+			The final step in the process is to ensure that the embedded servlet container doesn’t
+			interfere with the servlet container to which the war file will be deployed. To do so, you
+			need to mark the embedded servlet container dependency as provided.
+		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 	
 	<build>
 		<pluginManagement>

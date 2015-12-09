@@ -13,10 +13,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cz.cestadomu.hospis.core.lib.CoreLibConfiguration;
+import cz.cestadomu.hospis.core.lib.CoreLib;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = CoreLibConfiguration.class)
+@SpringApplicationConfiguration(classes = CoreLib.class)
 @TestPropertySource("classpath:/core-test.properties")
 public class AuthenticationRouteTest {
 

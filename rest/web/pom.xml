@@ -11,8 +11,8 @@
 
 	<artifactId>rest-web</artifactId>
 	<packaging>war</packaging>
-	<name>Hospis REST API</name>
-	<description>Module that serves in Hospis project as a thin layer for translation between public REST API and core module.</description>
+	<name>Hospis REST API web</name>
+	<description>Web application wrapper around REST API library</description>
 	<url>https://github.com/calaveraInfo/hospis/wiki</url>
 
 	<scm>
@@ -20,58 +20,11 @@
 	</scm>
 
 	<dependencies>
-		<!--
-			Contains Spring security dependencies.
-		-->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
+			<groupId>cz.cestadomu.hospis</groupId>
+			<artifactId>rest-lib</artifactId>
 		</dependency>
-
-		<!--
-			Contains object to xml conversion libraries.
-		-->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-oxm</artifactId>
-		</dependency>
-
-		<!--
-			Contains web related dependencies like @RestController, @RequestMapping etc.
-		-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<!--
-			Contains integration related dependencies like @IntegrationComponentScan, @MessagingGateway etc.
-		-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-integration</artifactId>
-		</dependency>
-
-		<!--
-			JMS related dependencies
-		-->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-jms</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-jms</artifactId>
-		</dependency>
-
-		<!--
-			ActiveMQ related dependencies
-		-->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-spring</artifactId>
-		</dependency>
-
+		
 		<!--
 			Actuator provides generic web application operational tools like monitoring, auditing etc.
 		-->
@@ -79,16 +32,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
+		
 		<!--
-			Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
+			Contains web related dependencies like @RestController, @RequestMapping etc.
 		-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
 		<!--
 			http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
 			74.1 Create a deployable war file
@@ -102,97 +54,5 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!--
-			Contains Hospis core module data model.
-		-->
-		<dependency>
-			<groupId>cz.cestadomu.hospis</groupId>
-			<artifactId>core-model</artifactId>
-		</dependency>
 	</dependencies>
-
-	<profiles>
-		<profile>
-			<id>monolith</id>
-			<properties>
-				<spring.profiles.active>monolith</spring.profiles.active>
-			</properties>
-			<dependencies>
-				<dependency>
-					<groupId>cz.cestadomu.hospis</groupId>
-					<artifactId>mq-lib</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>cz.cestadomu.hospis</groupId>
-					<artifactId>core-lib</artifactId>
-				</dependency>
-				<dependency>
-					<groupId>cz.cestadomu.hospis</groupId>
-					<artifactId>client-web</artifactId>
-					<type>war</type>
-					<scope>runtime</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>microservice</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<spring.profiles.active>microservice</spring.profiles.active>
-			</properties>
-		</profile>
-	</profiles>
-
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<dependentWarExcludes>WEB-INF/web.xml</dependentWarExcludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack-core-model</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeArtifactIds>core-model</includeArtifactIds>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>generate-core-model</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<schemaDirectory>${project.build.directory}/dependency/schema</schemaDirectory>
-					<schemaIncludes>
-						<include>**/*.xsd</include>
-					</schemaIncludes>
-					<bindingDirectory>src/main/resources/bindings</bindingDirectory>
-					<bindingIncludes>
-						<bindingInclude>global-bindings.xjb</bindingInclude>
-					</bindingIncludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>

@@ -74,6 +74,7 @@
 	</distributionManagement>
 
 	<modules>
+		<module>lib</module>
 		<module>web</module>
 	</modules>
 
@@ -82,17 +83,34 @@
 		<dependency.plugin.version>2.10</dependency.plugin.version>
 		<jaxb2.plugin.version>0.11.0</jaxb2.plugin.version>
 		<site.plugin.version>3.4</site.plugin.version>
-		<war.plugin.version>2.5</war.plugin.version>
 		<activemq.version>5.10.1</activemq.version>
 		<doxia.markdown.version>1.6</doxia.markdown.version>
+		<java.version>1.8</java.version>
+		<core.version>0.0.1-SNAPSHOT</core.version>
+		<rest.version>0.0.1-SNAPSHOT</rest.version>
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>cz.cestadomu.hospis</groupId>
+				<artifactId>rest-lib</artifactId>
+				<version>${rest.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.cestadomu.hospis</groupId>
+				<artifactId>rest-web</artifactId>
+				<version>${rest.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.apache.activemq</groupId>
 				<artifactId>activemq-spring</artifactId>
 				<version>${activemq.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.cestadomu.hospis</groupId>
+				<artifactId>core-model</artifactId>
+				<version>${core.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -104,11 +122,6 @@
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-dependency-plugin</artifactId>
 					<version>${dependency.plugin.version}</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>${war.plugin.version}</version>
 				</plugin>
 				<plugin>
 					<groupId>org.jvnet.jaxb2.maven2</groupId>
@@ -130,59 +143,4 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<profiles>
-		<profile>
-			<id>monolith</id>
-			<properties>
-				<core.version>0.0.1-SNAPSHOT</core.version>
-				<mq.version>0.0.1-SNAPSHOT</mq.version>
-				<client.version>0.0.1-SNAPSHOT</client.version>
-			</properties>
-			<dependencyManagement>
-				<dependencies>
-					<dependency>
-						<groupId>cz.cestadomu.hospis</groupId>
-						<artifactId>core-lib</artifactId>
-						<version>${core.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>cz.cestadomu.hospis</groupId>
-						<artifactId>core-model</artifactId>
-						<version>${core.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>cz.cestadomu.hospis</groupId>
-						<artifactId>mq-lib</artifactId>
-						<version>${mq.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>cz.cestadomu.hospis</groupId>
-						<artifactId>client-web</artifactId>
-						<version>${client.version}</version>
-						<type>war</type>
-					</dependency>
-				</dependencies>
-			</dependencyManagement>
-		</profile>
-		
-		<profile>
-			<id>microservice</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<core.version>0.0.1-SNAPSHOT</core.version>
-			</properties>
-			<dependencyManagement>
-				<dependencies>
-					<dependency>
-						<groupId>cz.cestadomu.hospis</groupId>
-						<artifactId>core-model</artifactId>
-						<version>${core.version}</version>
-					</dependency>
-				</dependencies>
-			</dependencyManagement>
-		</profile>
-	</profiles>
 </project>
