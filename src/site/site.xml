@@ -7,8 +7,7 @@
 	</skin>
 	<body>
 		<menu name="Documentation">
-			<item name="Test" href="test.html" />
+			<item name="Index" href="index.html" />
 		</menu>
-		<menu ref="reports" />
 	</body>
 </project>

@@ -18,51 +18,8 @@
 	<packaging>war</packaging>
 
 	<name>Hospis all-in-one bundle</name>
-	<description>Module for bundling all Hospis modules to single monolith</description>
+	<description>Module for bundling all Hospis modules to single monolith for development purposes.</description>
 	<url>https://github.com/calaveraInfo/hospis/wiki</url>
-
-	<licenses>
-		<license>
-			<name>GNU General Public License, Version 2</name>
-			<url>http://www.gnu.org/licenses/old-licenses/gpl-2.0.html</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
-
-	<organization>
-		<name>Cesta domů, z.ú.</name>
-		<url>http://cestadomu.cz</url>
-	</organization>
-
-	<developers>
-		<developer>
-			<id>fre</id>
-			<name>František Řezáč</name>
-			<email>frantisek.rezac@calavera.info</email>
-			<url>http://calavera.info</url>
-			<roles>
-				<role>architect</role>
-				<role>developer</role>
-			</roles>
-			<timezone>Europe/Prague</timezone>
-		</developer>
-	</developers>
-
-	<issueManagement>
-		<system>JIRA</system>
-		<url>https://cestadomu.atlassian.net</url>
-	</issueManagement>
-
-	<ciManagement>
-		<system>Bamboo</system>
-		<url>https://cestadomu.atlassian.net</url>
-	</ciManagement>
-
-	<scm>
-		<connection>scm:git:https://github.com/calaveraInfo/hospis.git</connection>
-		<developerConnection>scm:git:https://github.com/calaveraInfo/hospis.git</developerConnection>
-		<url>https://github.com/calaveraInfo/hospis/tree/master/bundle</url>
-	</scm>
 
 	<distributionManagement>
 		<site>
@@ -82,7 +39,27 @@
 		<mq.version>0.0.1-SNAPSHOT</mq.version>
 		<rest.version>0.0.1-SNAPSHOT</rest.version>
 		<client.version>0.0.1-SNAPSHOT</client.version>
+		<reports.plugin.version>2.8.1</reports.plugin.version>
 	</properties>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${reports.plugin.version}</version>
+				<configuration>
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<dependencyManagement>
 		<dependencies>

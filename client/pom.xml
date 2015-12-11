@@ -83,7 +83,33 @@
 		<doxia.markdown.version>1.6</doxia.markdown.version>
 		<site.plugin.version>3.4</site.plugin.version>
 		<java.version>1.8</java.version>
+		<reports.plugin.version>2.8.1</reports.plugin.version>
 	</properties>
+	
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>${reports.plugin.version}</version>
+				<configuration>
+					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+				</configuration>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>summary</report>
+							<report>project-team</report>
+							<report>scm</report>
+							<report>cim</report>
+							<report>issue-tracking</report>
+							<report>license</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 	
 	<dependencyManagement>
 		<dependencies>
