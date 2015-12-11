@@ -10,4 +10,6 @@ public class RestLib {
 	// kontejneru.
 	// TODO Odstranit vlastni implementaci marshalling message converteru, az
 	// nebude potreba posilat binarni objekty.
+
+	// public IntegrationFlow
 }
