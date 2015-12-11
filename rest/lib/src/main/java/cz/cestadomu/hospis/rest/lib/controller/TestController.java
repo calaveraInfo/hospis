@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import cz.cestadomu.hospis.model.Greeting;
 import cz.cestadomu.hospis.rest.lib.gateway.TestGateway;
 import cz.cestadomu.hospis.rest.lib.model.Test;
 
@@ -20,7 +21,9 @@ public class TestController {
 
 	@RequestMapping("/greeting")
 	public Test greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return new Test(counter.incrementAndGet(), testGateway.greeting(String.format(template, name)));
+		Greeting greeting = new Greeting();
+		greeting.setName(String.format(template, name));
+		return new Test(counter.incrementAndGet(), testGateway.greeting(greeting).getName());
 	}
 
 }

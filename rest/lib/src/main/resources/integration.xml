@@ -6,7 +6,7 @@
        http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.10.1.xsd
        http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.2.xsd
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
-       http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.1.xsd
+       http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd
        http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.1.xsd">
 
 	<int:gateway service-interface="cz.cestadomu.hospis.rest.lib.gateway.TestGateway"
@@ -28,16 +28,17 @@
 	<int-jms:outbound-gateway request-destination-name="restRequest"
 		request-channel="jmsOutboundChannel" connection-factory="jmsFactory"
 		reply-destination-name="restResponse" correlation-key="JMSCorrelationID"
-		message-converter="messageConverter">
+		message-converter="messageConverter" reply-timeout="20000">
 		<int-jms:reply-listener/>
 	</int-jms:outbound-gateway>
 
-	<bean class="cz.cestadomu.hospis.rest.lib.MyMarshallingMessageConverter" id="messageConverter">
+	<bean class="org.springframework.jms.support.converter.MarshallingMessageConverter" id="messageConverter">
 		<property name="marshaller" ref="marshaller"/>
 		<property name="unmarshaller" ref="marshaller"/>
 	</bean>
 
 	<oxm:jaxb2-marshaller id="marshaller">
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Greeting"/>
 		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Credentials"/>
 		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.AuthenticationResult"/>
 	</oxm:jaxb2-marshaller>

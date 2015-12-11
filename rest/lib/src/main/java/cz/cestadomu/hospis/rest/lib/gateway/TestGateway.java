@@ -1,7 +1,9 @@
 package cz.cestadomu.hospis.rest.lib.gateway;
 
+import cz.cestadomu.hospis.model.Greeting;
+
 public interface TestGateway {
 
-	String greeting(String name);
+	Greeting greeting(Greeting greeting);
 
 }
