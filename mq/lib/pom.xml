@@ -3,19 +3,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>mq-lib</artifactId>
-	<packaging>jar</packaging>
-
-	<name>Hospis embedded broker library</name>
-
 	<parent>
 		<groupId>cz.cestadomu.hospis</groupId>
 		<artifactId>mq</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<artifactId>mq-lib</artifactId>
+	<name>Hospis embedded broker library</name>
+	<description>ActiveMQ broker.</description>
+	<url>https://github.com/calaveraInfo/hospis</url>
+
+	<scm>
+		<url>https://github.com/calaveraInfo/hospis/tree/master/mq/lib</url>
+	</scm>
+
 	<dependencies>
-		
 		<!-- 
 		ActiveMQ related dependencies
 		 -->

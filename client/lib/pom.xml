@@ -12,7 +12,7 @@
 	<artifactId>client-lib</artifactId>
 	<name>Hospis browser client library</name>
 	<description>Implementation of browser client for Hospis</description>
-	<url>https://github.com/calaveraInfo/hospis/wiki</url>
+	<url>https://github.com/calaveraInfo/hospis</url>
 
 	<scm>
 		<url>https://github.com/calaveraInfo/hospis/tree/master/client/lib</url>

@@ -13,7 +13,7 @@
 	<packaging>war</packaging>
 	<name>Hospis REST API web</name>
 	<description>Web application wrapper around REST API library</description>
-	<url>https://github.com/calaveraInfo/hospis/wiki</url>
+	<url>https://github.com/calaveraInfo/hospis</url>
 
 	<scm>
 		<url>https://github.com/calaveraInfo/hospis/tree/master/rest/web</url>

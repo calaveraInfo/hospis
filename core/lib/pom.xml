@@ -3,16 +3,20 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>core-lib</artifactId>
-	<packaging>jar</packaging>
-
-	<name>Hospis core library</name>
-
 	<parent>
 		<groupId>cz.cestadomu.hospis</groupId>
 		<artifactId>core</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+
+	<artifactId>core-lib</artifactId>
+	<name>Hospis core library</name>
+	<description>Module with core business logic.</description>
+	<url>https://github.com/calaveraInfo/hospis</url>
+
+	<scm>
+		<url>https://github.com/calaveraInfo/hospis/tree/master/rest/lib</url>
+	</scm>
 
 	<dependencies>
 		<dependency>

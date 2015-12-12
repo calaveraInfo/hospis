@@ -16,6 +16,8 @@
 	
 	<properties>
 		<reports.plugin.version>2.8.1</reports.plugin.version>
+		<doxia.markdown.version>1.6</doxia.markdown.version>
+		<site.plugin.version>3.4</site.plugin.version>
 	</properties>
 	
 	<reporting>
@@ -30,7 +32,6 @@
 				<reportSets>
 					<reportSet>
 						<reports>
-							<report>index</report>
 							<report>summary</report>
 							<report>project-team</report>
 							<report>scm</report>

@@ -16,10 +16,9 @@
 	<artifactId>rest</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
 	<name>Hospis REST API root parent</name>
 	<description>Root parent of this Maven reactor, see submodules.</description>
-	<url>https://github.com/calaveraInfo/hospis/wiki</url>
+	<url>https://github.com/calaveraInfo/hospis</url>
 
 	<licenses>
 		<license>

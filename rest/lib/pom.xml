@@ -12,7 +12,7 @@
 	<artifactId>rest-lib</artifactId>
 	<name>Hospis REST API library</name>
 	<description>Module that serves in Hospis project as a thin layer for translation between public REST API and core module.</description>
-	<url>https://github.com/calaveraInfo/hospis/wiki</url>
+	<url>https://github.com/calaveraInfo/hospis</url>
 
 	<scm>
 		<url>https://github.com/calaveraInfo/hospis/tree/master/rest/lib</url>

@@ -19,7 +19,7 @@
 
 	<name>Hospis browser client root parent</name>
 	<description>Root parent of this Maven reactor, see submodules.</description>
-	<url>https://github.com/calaveraInfo/hospis/wiki</url>
+	<url>https://github.com/calaveraInfo/hospis</url>
 
 	<licenses>
 		<license>
