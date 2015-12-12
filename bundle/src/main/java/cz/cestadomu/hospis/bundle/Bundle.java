@@ -1,5 +1,6 @@
 package cz.cestadomu.hospis.bundle;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
@@ -13,5 +14,9 @@ public class Bundle extends SpringBootServletInitializer {
 	@Override
 	protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
 		return application.sources(MqLib.class, CoreLib.class, RestLib.class);
+	}
+
+	public static void main(String... args) {
+		SpringApplication.run(new Object[] {MqLib.class, CoreLib.class, RestLib.class}, args);
 	}
 }

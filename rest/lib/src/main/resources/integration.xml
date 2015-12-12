@@ -29,7 +29,7 @@
 		request-channel="jmsOutboundChannel" connection-factory="jmsFactory"
 		reply-destination-name="restResponse" correlation-key="JMSCorrelationID"
 		message-converter="messageConverter" reply-timeout="20000">
-		<int-jms:reply-listener/>
+		<int-jms:reply-listener receive-timeout="20000"/>
 	</int-jms:outbound-gateway>
 
 	<bean class="org.springframework.jms.support.converter.MarshallingMessageConverter" id="messageConverter">

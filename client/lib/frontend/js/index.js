@@ -1,1 +1,1 @@
-document.write("ttt");
+document.write("xxx");

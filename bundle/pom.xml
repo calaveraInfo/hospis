@@ -119,21 +119,28 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
-		<!--
-			http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
-			74.1 Create a deployable war file
-			...
-			The final step in the process is to ensure that the embedded servlet container doesn’t
-			interfere with the servlet container to which the war file will be deployed. To do so, you
-			need to mark the embedded servlet container dependency as provided.
-		-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
+	
+	<profiles>
+		<profile>
+			<id>war</id>
+			<dependencies>
+				<!--
+					http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
+					74.1 Create a deployable war file
+					...
+					The final step in the process is to ensure that the embedded servlet container doesn’t
+					interfere with the servlet container to which the war file will be deployed. To do so, you
+					need to mark the embedded servlet container dependency as provided.
+				-->
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-tomcat</artifactId>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 	
 	<build>
 		<pluginManagement>
