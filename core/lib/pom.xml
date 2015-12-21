@@ -83,5 +83,16 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+	
+	<profiles>
+		<profile>
+			<id>mock</id>
+			<dependencies>
+				<dependency>
+					<groupId>cz.cestadomu.hospis</groupId>
+					<artifactId>core-mock</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 </project>

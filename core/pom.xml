@@ -86,7 +86,6 @@
 		<module>model</module>
 		<module>lib</module>
 		<module>web</module>
-		<module>mock</module>
 	</modules>
 	
 	<reporting>
@@ -178,5 +177,14 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<profiles>
+		<profile>
+			<id>mock</id>
+			<modules>
+				<module>mock</module>
+			</modules>
+		</profile>
+	</profiles>
 
 </project>
