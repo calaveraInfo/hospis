@@ -17,6 +17,7 @@ public class SchemaTest {
 
 	@Test
 	public void credentialsSchemaTest() throws SAXException, IOException {
+
 		final Validator validator = this.schemaFactory
 				.newSchema(new StreamSource(getClass().getResourceAsStream(Schema.CREDENTIALS)))
 				.newValidator();
