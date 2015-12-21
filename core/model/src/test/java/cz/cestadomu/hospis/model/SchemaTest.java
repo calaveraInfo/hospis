@@ -10,6 +10,8 @@ import javax.xml.validation.Validator;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import cz.cestadomu.hospis.mock.Mock;
+
 public class SchemaTest {
 	SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
@@ -18,6 +20,6 @@ public class SchemaTest {
 		final Validator validator = this.schemaFactory
 				.newSchema(new StreamSource(getClass().getResourceAsStream(Schema.CREDENTIALS)))
 				.newValidator();
-		validator.validate(new StreamSource(getClass().getResourceAsStream("/credentials.xml")));
+		validator.validate(new StreamSource(getClass().getResourceAsStream(Mock.CREDENTIALS)));
 	}
 }
