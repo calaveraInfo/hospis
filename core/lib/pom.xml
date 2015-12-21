@@ -73,6 +73,10 @@
 			<groupId>cz.cestadomu.hospis</groupId>
 			<artifactId>core-model</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

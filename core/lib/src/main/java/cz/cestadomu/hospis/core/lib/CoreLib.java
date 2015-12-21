@@ -8,6 +8,8 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication
 @PropertySource("classpath:/core.properties")
 public class CoreLib {
+	public static final String MOCK_PROFILE = "mock";
+
 	@Bean
 	public ActiveMQComponent activemq() {
 		final ActiveMQComponent component = new ActiveMQComponent();

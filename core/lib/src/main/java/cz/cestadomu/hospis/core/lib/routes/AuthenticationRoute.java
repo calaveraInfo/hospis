@@ -16,14 +16,14 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+
+import cz.cestadomu.hospis.core.lib.CoreConfiguration;
 
 @Component
 public class AuthenticationRoute extends RouteBuilder {
 	private static final Logger log = LoggerFactory.getLogger(AuthenticationRoute.class);
-	protected static final String AUTHENTICATION_CHANNEL = "direct:authentication";
 
 	@Autowired
 	private ProducerTemplate producerTemplate;
@@ -31,15 +31,12 @@ public class AuthenticationRoute extends RouteBuilder {
 	@Autowired
 	private ApplicationContext context;
 
-	@Value("${endpoint.authentication}")
-	private String authenticationChannel;
-
-	@Value("${ws.intuo.login}")
-	private String loginChannel;
+	@Autowired
+	private CoreConfiguration config;
 
 	@Override
 	public void configure() throws Exception {
-		from(authenticationChannel).to(xslt(AUTHENTICATION)).to(loginChannel)
+		from(config.getAuthenticationChannel()).to(xslt(AUTHENTICATION)).to(config.getLoginComponent())
 				.to(xslt(AUTHENTICATION_RESULT));
 	}
 
@@ -48,7 +45,7 @@ public class AuthenticationRoute extends RouteBuilder {
 		log.info("Sending dynamic routing configuration message for {}.", AuthenticationRoute.class);
 		this.producerTemplate.sendBodyAndHeader(MainRouter.DYNAMIC_ROUTER_CONTROLL_CHANNEL,
 				IOUtils.toString(this.context.getResource(classpath(CREDENTIALS)).getInputStream()),
-				MainRouter.ROUTE_TO_HEADER_NAME, AUTHENTICATION_CHANNEL);
+				MainRouter.ROUTE_TO_HEADER_NAME, config.getAuthenticationChannel());
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
+import cz.cestadomu.hospis.model.AuthenticationResult;
 import cz.cestadomu.hospis.model.Credentials;
 import cz.cestadomu.hospis.rest.lib.gateway.AuthenticationGateway;
 
@@ -29,13 +30,16 @@ public class HospisAuthenticationProvider implements AuthenticationProvider {
 	}
 
 	@Override
-	public Authentication authenticate(final Authentication authentication) throws AuthenticationException {
+	public Authentication authenticate(final Authentication authentication)
+			throws AuthenticationException {
 		final Credentials credentials = new Credentials();
 		credentials.setUsername(authentication.getPrincipal().toString());
 		credentials.setPassword(authentication.getCredentials().toString());
-		if (this.authenticationGateway.authenticate(credentials).isAuthenticated()) {
-			return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(), authentication.getCredentials(),
-					Arrays.asList(new SimpleGrantedAuthority("USER")));
+		AuthenticationResult authenticationResult =
+				this.authenticationGateway.authenticate(credentials);
+		if (authenticationResult.isAuthenticated()) {
+			return new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
+					authenticationResult.getToken(), Arrays.asList(new SimpleGrantedAuthority("USER")));
 		}
 		return authentication;
 	}

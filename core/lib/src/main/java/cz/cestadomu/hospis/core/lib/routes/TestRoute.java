@@ -15,14 +15,14 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
+
+import cz.cestadomu.hospis.core.lib.CoreConfiguration;
 
 @Component
 public class TestRoute extends RouteBuilder {
 	private static final Logger log = LoggerFactory.getLogger(TestRoute.class);
-	protected static final String TEST_CHANNEL = "direct:test";
 
 	@Autowired
 	private ProducerTemplate producerTemplate;
@@ -30,12 +30,12 @@ public class TestRoute extends RouteBuilder {
 	@Autowired
 	private ApplicationContext context;
 
-	@Value("${endpoint.test}")
-	private String testChannel;
+	@Autowired
+	private CoreConfiguration config;
 
 	@Override
 	public void configure() throws Exception {
-		from(testChannel).to(xslt(GREETING));
+		from(config.getTestChannel()).to(xslt(GREETING));
 		// .transform().simple("x${body}");
 		// .marshal().jaxb().wireTap("stream:out")
 	}
@@ -45,6 +45,6 @@ public class TestRoute extends RouteBuilder {
 		log.info("Sending dynamic routing configuration message for {}.", TestRoute.class);
 		this.producerTemplate.sendBodyAndHeader(MainRouter.DYNAMIC_ROUTER_CONTROLL_CHANNEL,
 				IOUtils.toString(this.context.getResource(classpath(GREETING_SCHEMA)).getInputStream()),
-				MainRouter.ROUTE_TO_HEADER_NAME, TEST_CHANNEL);
+				MainRouter.ROUTE_TO_HEADER_NAME, config.getTestChannel());
 	}
 }
