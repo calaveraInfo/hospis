@@ -18,7 +18,13 @@ public class CoreConfiguration {
 	private String authenticationChannel;
 	@NotNull
 	@Size(min = 1)
+	private String getViewXChannel;
+	@NotNull
+	@Size(min = 1)
 	private String loginComponent;
+	@NotNull
+	@Size(min = 1)
+	private String getViewXComponent;
 
 	public String getTestChannel() {
 		return testChannel;
@@ -42,6 +48,22 @@ public class CoreConfiguration {
 
 	public void setLoginComponent(String loginComponent) {
 		this.loginComponent = loginComponent;
+	}
+
+	public String getGetViewXChannel() {
+		return getViewXChannel;
+	}
+
+	public void setGetViewXChannel(String getViewXChannel) {
+		this.getViewXChannel = getViewXChannel;
+	}
+
+	public String getGetViewXComponent() {
+		return getViewXComponent;
+	}
+
+	public void setGetViewXComponent(String getViewXComponent) {
+		this.getViewXComponent = getViewXComponent;
 	}
 
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.cestadomu.cz/hospis/model"
+	xmlns:tns="http://www.cestadomu.cz/hospis/model" elementFormDefault="qualified">
+	<xs:include schemaLocation="employee-types.xsd"/>
+	<xs:element name="employees">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" name="employee" type="tns:employee" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

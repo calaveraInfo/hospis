@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employee xmlns="http://www.cestadomu.cz/hospis/model">
+	<id>57191</id>
+	<firstName>Karolína</firstName>
+	<lastName>Krásná</lastName>
+	<jobDescription>Odlehčovací asistentka</jobDescription>
+</employee>

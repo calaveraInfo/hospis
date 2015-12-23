@@ -112,6 +112,11 @@
 			</dependency>
 			<dependency>
 				<groupId>cz.cestadomu.hospis</groupId>
+				<artifactId>core-mock</artifactId>
+				<version>${core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>cz.cestadomu.hospis</groupId>
 				<artifactId>mq-lib</artifactId>
 				<version>${mq.version}</version>
 			</dependency>
@@ -179,6 +184,15 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-tomcat</artifactId>
 					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+		</profile>
+		<profile>
+			<id>mock</id>
+			<dependencies>
+				<dependency>
+					<groupId>cz.cestadomu.hospis</groupId>
+					<artifactId>core-mock</artifactId>
 				</dependency>
 			</dependencies>
 		</profile>

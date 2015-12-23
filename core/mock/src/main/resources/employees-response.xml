@@ -1,0 +1,60 @@
+<GetViewXResponse xmlns="http://digres.cz/">
+	<GetViewXResult>
+		<xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+			<xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:MainDataTable="WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce"
+				msdata:UseCurrentLocale="true">
+				<xs:complexType>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ID" type="xs:int" minOccurs="0"></xs:element>
+									<xs:element name="c0" msdata:Caption="ID" type="xs:int" minOccurs="0"></xs:element>
+									<xs:element name="c1" msdata:Caption="Jméno" type="xs:string" minOccurs="0"></xs:element>
+									<xs:element name="c2" msdata:Caption="Příjmení" type="xs:string" minOccurs="0"></xs:element>
+									<xs:element name="c3" msdata:Caption="Pozice.Plné jméno" type="xs:string" minOccurs="0"></xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:choice>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+			<DocumentElement xmlns="">
+				<WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce
+					diffgr:id="WEB zaměstnanci pro výkaz práce1" msdata:rowOrder="0" diffgr:hasChanges="inserted">
+					<ID>2610100</ID>
+					<c0>2610100</c0>
+					<c1>Karel</c1>
+					<c2>Novák</c2>
+					<c3>Administrativa</c3>
+				</WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce>
+				<WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce
+					diffgr:id="WEB zaměstnanci pro výkaz práce2" msdata:rowOrder="1" diffgr:hasChanges="inserted">
+					<ID>57191</ID>
+					<c0>57191</c0>
+					<c1>Karolína</c1>
+					<c2>Krásná</c2>
+					<c3>Odlehčovací asistentka</c3>
+				</WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce>
+				<WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce
+					diffgr:id="WEB zaměstnanci pro výkaz práce3" msdata:rowOrder="2" diffgr:hasChanges="inserted">
+					<ID>2592774</ID>
+					<c0>2592774</c0>
+					<c1>Hugo</c1>
+					<c2>Gogo</c2>
+					<c3>Lékař</c3>
+				</WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce>
+				<WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce
+					diffgr:id="WEB zaměstnanci pro výkaz práce4" msdata:rowOrder="3" diffgr:hasChanges="inserted">
+					<ID>2603584</ID>
+					<c0>2603584</c0>
+					<c1>Ingrid</c1>
+					<c2>Falusová</c2>
+					<c3>Pečovatelka o děti</c3>
+				</WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce>
+			</DocumentElement>
+		</diffgr:diffgram>
+	</GetViewXResult>
+</GetViewXResponse>

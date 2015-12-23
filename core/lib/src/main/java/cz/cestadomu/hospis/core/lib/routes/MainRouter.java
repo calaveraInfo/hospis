@@ -25,9 +25,8 @@ public class MainRouter {
 	public static final String ROUTE_TO_HEADER_NAME = "routeTo";
 
 	/**
-	 * SEDA is used instead of direct because the controll messages are sent
-	 * also during application context initialization when this router might not
-	 * be initialized yet.
+	 * SEDA is used instead of direct because the controll messages are sent also during application
+	 * context initialization when this router might not be initialized yet.
 	 */
 	public static final String DYNAMIC_ROUTER_CONTROLL_CHANNEL = "seda:dynamicRouter";
 
@@ -38,6 +37,7 @@ public class MainRouter {
 	@RecipientList
 	@Consume(uri = InboundGateway.XML_MESSAGE_CHANNEL)
 	public String route(final Document body) {
+
 		log.debug("Routing message.");
 		for (final RoutingItem routingItem : this.routes) {
 			try {
@@ -52,7 +52,8 @@ public class MainRouter {
 	}
 
 	@Consume(uri = DYNAMIC_ROUTER_CONTROLL_CHANNEL)
-	public void recieveRoutingUpdate(@Header(ROUTE_TO_HEADER_NAME) final String routeTo, final Document schema) {
+	public void recieveRoutingUpdate(@Header(ROUTE_TO_HEADER_NAME) final String routeTo,
+			final String schema) {
 		log.info("Recieved dynamic routing configuration message.");
 		synchronized (this.routes) {
 			this.routes.add(new RoutingItem(routeTo, schema));
@@ -63,10 +64,11 @@ public class MainRouter {
 		private final String routeTo;
 		private final Validator validator;
 
-		public RoutingItem(final String routeTo, final Document schema) {
+		public RoutingItem(final String routeTo, final String schema) {
 			this.routeTo = routeTo;
 			try {
-				this.validator = MainRouter.this.factory.newSchema(new DOMSource(schema)).newValidator();
+				this.validator =
+						MainRouter.this.factory.newSchema(getClass().getResource(schema)).newValidator();
 			} catch (final SAXException e) {
 				throw new RuntimeException("New route item init failed.", e);
 			}

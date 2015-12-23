@@ -22,6 +22,13 @@
 			<int:header name="route" value="authentication"/>
 		</int:method>
 	</int:gateway>
+	
+	<int:gateway service-interface="cz.cestadomu.hospis.rest.lib.gateway.EmployeesGateway"
+		default-request-channel="jmsOutboundChannel">
+		<int:method name="getEmployees">
+			<int:header name="route" value="employees"/>
+		</int:method>
+	</int:gateway>
 
 	<int:channel id="jmsOutboundChannel" />
 
@@ -41,6 +48,8 @@
 		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Greeting"/>
 		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Credentials"/>
 		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.AuthenticationResult"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Employees"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.GetViewX"/>
 	</oxm:jaxb2-marshaller>
 
 	<amq:queue id="restRequest" physicalName="org.apache.activemq.spring.Test.spring.restRequests" />

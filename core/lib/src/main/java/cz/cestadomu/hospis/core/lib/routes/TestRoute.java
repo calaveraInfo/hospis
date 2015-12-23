@@ -3,7 +3,6 @@ package cz.cestadomu.hospis.core.lib.routes;
 import static cz.cestadomu.hospis.core.lib.Transformation.GREETING;
 import static cz.cestadomu.hospis.core.lib.Transformation.xslt;
 import static cz.cestadomu.hospis.model.Schema.GREETING_SCHEMA;
-import static cz.cestadomu.hospis.model.Schema.classpath;
 
 import java.io.IOException;
 
@@ -11,7 +10,6 @@ import javax.annotation.PostConstruct;
 
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +42,6 @@ public class TestRoute extends RouteBuilder {
 	public void sendDynamicRouterConfig() throws IOException {
 		log.info("Sending dynamic routing configuration message for {}.", TestRoute.class);
 		this.producerTemplate.sendBodyAndHeader(MainRouter.DYNAMIC_ROUTER_CONTROLL_CHANNEL,
-				IOUtils.toString(this.context.getResource(classpath(GREETING_SCHEMA)).getInputStream()),
-				MainRouter.ROUTE_TO_HEADER_NAME, config.getTestChannel());
+				GREETING_SCHEMA, MainRouter.ROUTE_TO_HEADER_NAME, config.getTestChannel());
 	}
 }
