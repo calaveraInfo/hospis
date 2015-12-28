@@ -10,9 +10,11 @@
 		</h:employees>
 	</xsl:template>
 	<xsl:template match="WEB_x0020_zaměstnanci_x0020_pro_x0020_výkaz_x0020_práce">
-		<h:id><xsl:value-of select="c0"/></h:id>
-		<h:firstName><xsl:value-of select="c1"/></h:firstName>
-		<h:lastName><xsl:value-of select="c2"/></h:lastName>
-		<h:jobDescription><xsl:value-of select="c3"/></h:jobDescription>
+		<h:employee>
+			<h:id><xsl:value-of select="c0"/></h:id>
+			<h:firstName><xsl:value-of select="c1"/></h:firstName>
+			<h:lastName><xsl:value-of select="c2"/></h:lastName>
+			<h:jobDescription><xsl:value-of select="c3"/></h:jobDescription>
+		</h:employee>
 	</xsl:template>
 </xsl:stylesheet>

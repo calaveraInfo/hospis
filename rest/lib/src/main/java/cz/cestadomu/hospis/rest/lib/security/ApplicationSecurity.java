@@ -24,6 +24,8 @@ class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(final AuthenticationManagerBuilder auth) throws Exception {
-		auth.authenticationProvider(this.hospisAuthenticationProvider);
+		auth.authenticationProvider(this.hospisAuthenticationProvider)
+				// Don't erase credentials because we store intuo token there
+				.eraseCredentials(false);
 	}
 }

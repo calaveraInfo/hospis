@@ -14,8 +14,8 @@ public class EmployeesController {
 	@Autowired
 	private EmployeesGateway employees;
 
-	@RequestMapping("/employees")
-	public Employees greeting() {
+	@RequestMapping(path = "/employees", produces = "application/json")
+	public Employees getAllEmployees() {
 		GetViewX request = new GetViewX();
 		request.setViewId(1707);
 		return employees.getEmployees(request);

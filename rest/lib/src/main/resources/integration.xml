@@ -26,7 +26,7 @@
 	<int:gateway service-interface="cz.cestadomu.hospis.rest.lib.gateway.EmployeesGateway"
 		default-request-channel="jmsOutboundChannel">
 		<int:method name="getEmployees">
-			<int:header name="route" value="employees"/>
+			<int:header name="token" expression="@security.intuoToken" />
 		</int:method>
 	</int:gateway>
 
