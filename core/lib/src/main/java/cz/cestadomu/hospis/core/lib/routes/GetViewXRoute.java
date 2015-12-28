@@ -14,7 +14,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import cz.cestadomu.hospis.core.lib.CoreConfiguration;
@@ -25,9 +24,6 @@ public class GetViewXRoute extends RouteBuilder {
 
 	@Autowired
 	private ProducerTemplate producerTemplate;
-
-	@Autowired
-	private ApplicationContext context;
 
 	@Autowired
 	private CoreConfiguration config;
