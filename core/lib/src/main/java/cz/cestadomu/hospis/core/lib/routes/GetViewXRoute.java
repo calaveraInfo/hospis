@@ -1,6 +1,6 @@
 package cz.cestadomu.hospis.core.lib.routes;
 
-import static cz.cestadomu.hospis.core.lib.Transform.EMPLOYEES_RESPONSE_TRANSFORM;
+import static cz.cestadomu.hospis.core.lib.Transform.GET_VIEW_X_EMPLOYEES_RESPONSE_TRANSFORM;
 import static cz.cestadomu.hospis.core.lib.Transform.GET_VIEW_X_REQUEST_TRANSFORM;
 import static cz.cestadomu.hospis.model.Schema.GET_VIEW_X_REQUEST;
 
@@ -30,7 +30,7 @@ public class GetViewXRoute extends RouteBuilder {
 	@Override
 	public void configure() throws Exception {
 		from(config.getGetViewXChannel()).to(GET_VIEW_X_REQUEST_TRANSFORM.xslt())
-				.to(config.getGetViewXComponent()).to(EMPLOYEES_RESPONSE_TRANSFORM.xslt());
+				.to(config.getGetViewXComponent()).to(GET_VIEW_X_EMPLOYEES_RESPONSE_TRANSFORM.xslt());
 	}
 
 	@PostConstruct

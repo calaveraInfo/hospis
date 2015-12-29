@@ -1,7 +1,7 @@
 package cz.cestadomu.hospis.core.lib.routes;
 
-import static cz.cestadomu.hospis.core.lib.Transform.AUTHENTICATION;
-import static cz.cestadomu.hospis.core.lib.Transform.AUTHENTICATION_RESULT;
+import static cz.cestadomu.hospis.core.lib.Transform.LOGIN_REQUEST;
+import static cz.cestadomu.hospis.core.lib.Transform.LOGIN_RESPONSE;
 import static cz.cestadomu.hospis.model.Schema.AUTHENTICATION_SCHEMA_RESULT;
 import static cz.cestadomu.hospis.model.Schema.CREDENTIALS;
 
@@ -30,8 +30,8 @@ public class AuthenticationRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from(config.getAuthenticationChannel()).to(CREDENTIALS.validator()).to(AUTHENTICATION.xslt())
-				.to(config.getLoginComponent()).to(AUTHENTICATION_RESULT.xslt())
+		from(config.getAuthenticationChannel()).to(CREDENTIALS.validator()).to(LOGIN_REQUEST.xslt())
+				.to(config.getLoginComponent()).to(LOGIN_RESPONSE.xslt())
 				.to(AUTHENTICATION_SCHEMA_RESULT.validator());
 	}
 

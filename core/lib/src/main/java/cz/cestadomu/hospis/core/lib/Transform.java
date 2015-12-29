@@ -1,10 +1,11 @@
 package cz.cestadomu.hospis.core.lib;
 
 public enum Transform {
-	GET_VIEW_X_REQUEST_TRANSFORM("/transformation/getViewXRequest.xsl"), EMPLOYEES_RESPONSE_TRANSFORM(
-			"/transformation/employeesResponse.xsl"), AUTHENTICATION(
-					"/transformation/authentication.xsl"), AUTHENTICATION_RESULT(
-							"/transformation/authenticationResult.xsl"), GREETING("/transformation/greeting.xsl");
+	GET_VIEW_X_REQUEST_TRANSFORM("/transform/getViewX/request.xsl"), //
+	GET_VIEW_X_EMPLOYEES_RESPONSE_TRANSFORM("/transform/getViewX/employeesResponse.xsl"), //
+	LOGIN_REQUEST("/transform/login/request.xsl"), //
+	LOGIN_RESPONSE("/transform/login/response.xsl"), //
+	GREETING("/transform/greeting.xsl");
 
 	private String path;
 
