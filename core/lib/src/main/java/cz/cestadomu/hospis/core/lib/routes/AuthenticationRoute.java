@@ -1,11 +1,9 @@
 package cz.cestadomu.hospis.core.lib.routes;
 
-import static cz.cestadomu.hospis.core.lib.Transformation.AUTHENTICATION;
-import static cz.cestadomu.hospis.core.lib.Transformation.AUTHENTICATION_RESULT;
-import static cz.cestadomu.hospis.core.lib.Transformation.xslt;
+import static cz.cestadomu.hospis.core.lib.Transform.AUTHENTICATION;
+import static cz.cestadomu.hospis.core.lib.Transform.AUTHENTICATION_RESULT;
 import static cz.cestadomu.hospis.model.Schema.AUTHENTICATION_SCHEMA_RESULT;
 import static cz.cestadomu.hospis.model.Schema.CREDENTIALS;
-import static cz.cestadomu.hospis.model.Schema.validator;
 
 import java.io.IOException;
 
@@ -32,16 +30,16 @@ public class AuthenticationRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from(config.getAuthenticationChannel()).to(validator(CREDENTIALS)).to(xslt(AUTHENTICATION))
-				.to(config.getLoginComponent()).to(xslt(AUTHENTICATION_RESULT))
-				.to(validator(AUTHENTICATION_SCHEMA_RESULT));
+		from(config.getAuthenticationChannel()).to(CREDENTIALS.validator()).to(AUTHENTICATION.xslt())
+				.to(config.getLoginComponent()).to(AUTHENTICATION_RESULT.xslt())
+				.to(AUTHENTICATION_SCHEMA_RESULT.validator());
 	}
 
 	@PostConstruct
 	public void sendDynamicRouterConfig() throws IOException {
 		log.info("Sending dynamic routing configuration message for {}.", AuthenticationRoute.class);
-		this.producerTemplate.sendBodyAndHeader(MainRouter.DYNAMIC_ROUTER_CONTROLL_CHANNEL, CREDENTIALS,
-				MainRouter.ROUTE_TO_HEADER_NAME, config.getAuthenticationChannel());
+		this.producerTemplate.sendBodyAndHeader(MainRouter.DYNAMIC_ROUTER_CONTROLL_CHANNEL,
+				CREDENTIALS.name(), MainRouter.ROUTE_TO_HEADER_NAME, config.getAuthenticationChannel());
 	}
 
 }

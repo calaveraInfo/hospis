@@ -28,7 +28,6 @@ import org.w3c.dom.Document;
 import cz.cestadomu.hospis.core.lib.CoreConfiguration;
 import cz.cestadomu.hospis.core.lib.CoreLib;
 import cz.cestadomu.hospis.core.lib.XmlNamespaceContext;
-import cz.cestadomu.hospis.mock.Mock;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CoreLib.class)
@@ -58,7 +57,7 @@ public class AuthenticationRouteTest {
 
 		Document result =
 				(Document) producerTemplate.asyncRequestBody(config.getAuthenticationChannel(),
-						IOUtils.toString(Mock.class.getResource(CREDENTIALS)), Document.class).get();
+						IOUtils.toString(CREDENTIALS.resourceUrl()), Document.class).get();
 		assertEquals("true", XPATH.evaluate("/h:authenticationResult/h:authenticated", result));
 		assertEquals(
 				"YPxdf3NLsE375l5emDP0/8xdMBC1ojiOaB9Sbz1C7QdhrrfwQgu/I+nQbgM7H7WOq2tJae1ZA77DzxdT+EAQuflW/Op8A7zBnQwm5DQ0Ukhqw8TR+IMaCKv5LHP0bCqpv7UK5A==",

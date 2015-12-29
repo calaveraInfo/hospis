@@ -22,20 +22,20 @@ public class SchemaTest {
 
 	@Test
 	public void credentialsTest() throws SAXException, IOException {
-		schemaFactory.newSchema(getClass().getResource(Schema.CREDENTIALS)).newValidator()
-				.validate(new StreamSource(getClass().getResourceAsStream(Mock.CREDENTIALS)));
+		schemaFactory.newSchema(Schema.CREDENTIALS.resourceUrl()).newValidator()
+				.validate(new StreamSource(Mock.CREDENTIALS.resourceStream()));
 	}
 
 	@Test
 	public void employeeTest() throws SAXException, IOException {
-		schemaFactory.newSchema(getClass().getResource(Schema.EMPLOYEE)).newValidator()
-				.validate(new StreamSource(getClass().getResourceAsStream(Mock.EMPLOYEE)));
+		schemaFactory.newSchema(Schema.EMPLOYEE.resourceUrl()).newValidator()
+				.validate(new StreamSource(Mock.EMPLOYEE.resourceStream()));
 	}
 
 	@Test
 	public void employeesTest() throws SAXException, IOException {
-		schemaFactory.newSchema(Schema.class.getResource(Schema.EMPLOYEES)).newValidator()
-				.validate(new StreamSource(getClass().getResourceAsStream(Mock.EMPLOYEES)));
+		schemaFactory.newSchema(Schema.EMPLOYEES.resourceUrl()).newValidator()
+				.validate(new StreamSource(Mock.EMPLOYEES.resourceStream()));
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class SchemaTest {
 	 */
 	@Test(expected = SAXParseException.class)
 	public void transitiveLeakTest() throws SAXException, IOException {
-		schemaFactory.newSchema(Schema.class.getResource(Schema.EMPLOYEE)).newValidator()
-				.validate(new StreamSource(getClass().getResourceAsStream(Mock.EMPLOYEES)));
+		schemaFactory.newSchema(Schema.EMPLOYEE.resourceUrl()).newValidator()
+				.validate(new StreamSource(Mock.EMPLOYEES.resourceStream()));
 	}
 }

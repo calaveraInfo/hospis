@@ -1,7 +1,6 @@
 package cz.cestadomu.hospis.core.lib.routes;
 
-import static cz.cestadomu.hospis.core.lib.Transformation.GREETING;
-import static cz.cestadomu.hospis.core.lib.Transformation.xslt;
+import static cz.cestadomu.hospis.core.lib.Transform.GREETING;
 import static cz.cestadomu.hospis.model.Schema.GREETING_SCHEMA;
 
 import java.io.IOException;
@@ -29,15 +28,13 @@ public class TestRoute extends RouteBuilder {
 
 	@Override
 	public void configure() throws Exception {
-		from(config.getTestChannel()).to(xslt(GREETING));
-		// .transform().simple("x${body}");
-		// .marshal().jaxb().wireTap("stream:out")
+		from(config.getTestChannel()).to(GREETING.xslt());
 	}
 
 	@PostConstruct
 	public void sendDynamicRouterConfig() throws IOException {
 		log.info("Sending dynamic routing configuration message for {}.", TestRoute.class);
 		this.producerTemplate.sendBodyAndHeader(MainRouter.DYNAMIC_ROUTER_CONTROLL_CHANNEL,
-				GREETING_SCHEMA, MainRouter.ROUTE_TO_HEADER_NAME, config.getTestChannel());
+				GREETING_SCHEMA.name(), MainRouter.ROUTE_TO_HEADER_NAME, config.getTestChannel());
 	}
 }

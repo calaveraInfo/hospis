@@ -1,19 +1,34 @@
 package cz.cestadomu.hospis.model;
 
-public class Schema {
-	public static final String NAMESPACE = "http://www.cestadomu.cz/hospis/model";
-	public static final String CREDENTIALS = "/schema/credentials.xsd";
-	public static final String GREETING_SCHEMA = "/schema/greeting.xsd";
-	public static final String EMPLOYEE = "/schema/employee.xsd";
-	public static final String EMPLOYEES = "/schema/employees.xsd";
-	public static final String GET_VIEW_X_REQUEST = "/schema/getViewXRequest.xsd";
-	public static final String AUTHENTICATION_SCHEMA_RESULT = "/schema/authenticationResult.xsd";
+import java.net.URL;
 
-	public static String classpath(String schema) {
-		return "classpath:" + schema;
+public enum Schema {
+	CREDENTIALS("/schema/credentials.xsd"), GREETING_SCHEMA("/schema/greeting.xsd"), EMPLOYEE(
+			"/schema/employee.xsd"), EMPLOYEES("/schema/employees.xsd"), GET_VIEW_X_REQUEST(
+					"/schema/getViewXRequest.xsd"), AUTHENTICATION_SCHEMA_RESULT(
+							"/schema/authenticationResult.xsd");
+
+	public static final String NAMESPACE = "http://www.cestadomu.cz/hospis/model";
+
+	private String path;
+
+	private Schema(String path) {
+		this.path = path;
 	}
 
-	public static String validator(String schema) {
-		return "validator:" + schema;
+	public String classpath() {
+		return "classpath:" + this.path;
+	}
+
+	public String validator() {
+		return "validator:" + this.path;
+	}
+
+	public URL resourceUrl() {
+		return Schema.class.getResource(this.path);
+	}
+
+	public String path() {
+		return this.path;
 	}
 }

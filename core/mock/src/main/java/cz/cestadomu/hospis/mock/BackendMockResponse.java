@@ -14,11 +14,11 @@ import org.springframework.stereotype.Component;
 public class BackendMockResponse {
 	private static final Logger LOG = LoggerFactory.getLogger(BackendMockResponse.class);
 
-	public String mock(String mockResponseResource, String request) {
+	public String mock(Mock mockResponseResource, String request) {
 		LOG.info("Recieved request to backend mock component:\n{}", request);
 		String response;
 		try {
-			response = IOUtils.toString(Mock.class.getResource(mockResponseResource));
+			response = IOUtils.toString(mockResponseResource.resourceUrl());
 			LOG.info("Returning mock response from backend component:\n{}", response);
 			return response;
 		} catch (IOException e) {

@@ -69,7 +69,7 @@ public class MainRouter {
 		public RoutingItem(final String routeTo, final String schema) {
 			this.routeTo = routeTo;
 			try {
-				this.validator = factory.newSchema(Schema.class.getResource(schema)).newValidator();
+				this.validator = factory.newSchema(Schema.valueOf(schema).resourceUrl()).newValidator();
 			} catch (final SAXException e) {
 				throw new RuntimeException("New route item init failed.", e);
 			}
