@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.cestadomu.cz/hospis/model"
+	xmlns:tns="http://www.cestadomu.cz/hospis/model" elementFormDefault="qualified">
+	<xs:include schemaLocation="../employee.xsd"/>
+	<xs:element name="employee" type="tns:employee"/>
+</xs:schema>

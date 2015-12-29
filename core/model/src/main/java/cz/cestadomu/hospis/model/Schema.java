@@ -3,10 +3,12 @@ package cz.cestadomu.hospis.model;
 import java.net.URL;
 
 public enum Schema {
-	CREDENTIALS("/schema/credentials.xsd"), GREETING_SCHEMA("/schema/greeting.xsd"), EMPLOYEE(
-			"/schema/employee.xsd"), EMPLOYEES("/schema/employees.xsd"), GET_VIEW_X_REQUEST(
-					"/schema/getViewXRequest.xsd"), AUTHENTICATION_SCHEMA_RESULT(
-							"/schema/authenticationResult.xsd");
+	CREDENTIALS("/schema/login/request.xsd"), //
+	AUTHENTICATION_SCHEMA_RESULT("/schema/login/response.xsd"), //
+	GET_VIEW_X_REQUEST("/schema/getViewX/request.xsd"), //
+	EMPLOYEES("/schema/getViewX/employeesResponse.xsd"), //
+	EMPLOYEE("/schema/getObjectInfo/employeeResponse.xsd"), //
+	GREETING_SCHEMA("/schema/greeting/greeting.xsd");
 
 	public static final String NAMESPACE = "http://www.cestadomu.cz/hospis/model";
 
