@@ -1,7 +1,7 @@
 package cz.cestadomu.hospis.mock;
 
-import static cz.cestadomu.hospis.mock.Mock.EMPLOYEES_RESPONSE;
-import static cz.cestadomu.hospis.mock.Mock.LOGIN_RESPONSE;
+import static cz.cestadomu.hospis.mock.Mock.BACKEND_GET_VIEW_X_EMPLOYEES_RESPONSE_MOCK;
+import static cz.cestadomu.hospis.mock.Mock.BACKEND_LOGIN_RESPONSE_MOCK;
 
 import java.io.IOException;
 
@@ -27,10 +27,10 @@ public class BackendMockResponse {
 	}
 
 	public String login(String request) {
-		return mock(LOGIN_RESPONSE, request);
+		return mock(BACKEND_LOGIN_RESPONSE_MOCK, request);
 	}
 
 	public String getViewX(String request) {
-		return mock(EMPLOYEES_RESPONSE, request);
+		return mock(BACKEND_GET_VIEW_X_EMPLOYEES_RESPONSE_MOCK, request);
 	}
 }

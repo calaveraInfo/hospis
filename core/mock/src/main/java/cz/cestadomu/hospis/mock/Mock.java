@@ -4,10 +4,13 @@ import java.io.InputStream;
 import java.net.URL;
 
 public enum Mock {
-	AUTHENTICATION_RESULT("/authenticationResult.xml"), CREDENTIALS(
-			"/credentials.xml"), LOGIN_RESPONSE("/login-response.xml"), EMPLOYEE(
-					"/employee.xml"), EMPLOYEES("/employees.xml"), EMPLOYEES_RESPONSE(
-							"/employees-response.xml");
+	CLIENT_LOGIN_REQUEST_MOCK("/mock/client/login/loginRequest.xml"), //
+	CLIENT_LOGIN_RESPONSE_MOCK("/mock/client/login/loginResponse.xml"), //
+	BACKEND_LOGIN_RESPONSE_MOCK("/mock/backend/login/loginResponse.xml"), //
+	CLIENT_GET_VIEW_X_EMPLOYEE_REQUEST_MOCK("/mock/client/getViewX/employeesRequest"), //
+	CLIENT_GET_VIEW_X_EMPLOYEE_RESPONSE_MOCK("/mock/client/getViewX/employeeResponse.xml"), //
+	CLIENT_GET_VIEW_X_EMPLOYEES_RESPONSE_MOCK("/mock/client/getViewX/employeesResponse.xml"), //
+	BACKEND_GET_VIEW_X_EMPLOYEES_RESPONSE_MOCK("/mock/backend/getViewX/employeesResponse.xml");
 
 	private String path;
 

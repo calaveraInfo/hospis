@@ -1,6 +1,6 @@
 package cz.cestadomu.hospis.core.lib.routes;
 
-import static cz.cestadomu.hospis.mock.Mock.CREDENTIALS;
+import static cz.cestadomu.hospis.mock.Mock.CLIENT_LOGIN_REQUEST_MOCK;
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
@@ -57,7 +57,7 @@ public class AuthenticationRouteTest {
 
 		Document result =
 				(Document) producerTemplate.asyncRequestBody(config.getAuthenticationChannel(),
-						IOUtils.toString(CREDENTIALS.resourceUrl()), Document.class).get();
+						IOUtils.toString(CLIENT_LOGIN_REQUEST_MOCK.resourceUrl()), Document.class).get();
 		assertEquals("true", XPATH.evaluate("/h:authenticationResult/h:authenticated", result));
 		assertEquals(
 				"YPxdf3NLsE375l5emDP0/8xdMBC1ojiOaB9Sbz1C7QdhrrfwQgu/I+nQbgM7H7WOq2tJae1ZA77DzxdT+EAQuflW/Op8A7zBnQwm5DQ0Ukhqw8TR+IMaCKv5LHP0bCqpv7UK5A==",
