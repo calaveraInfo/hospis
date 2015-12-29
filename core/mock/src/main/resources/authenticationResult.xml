@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<credentials xmlns="http://www.cestadomu.cz/hospis/model">
+<authenticationResult xmlns="http://www.cestadomu.cz/hospis/model">
 	<authenticated>true</authenticated>
 	<token>R6TjsXD8+D+B9j9wQRayuLGXUTVduSEdLZzCXRlHR+MlzzijBShZf0WHa0c7HEAbmf1/nkRFko6CxYTUOZolOq5bSnHdDrKIPtHv1k3Z4hFcp8McyKif4DyqIECjhEWrYTCZ3w==</token>
-</credentials>
+</authenticationResult>

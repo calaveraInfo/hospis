@@ -30,6 +30,10 @@
 		    <groupId>org.apache.activemq</groupId>
 		    <artifactId>activemq-spring</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter</artifactId>
+		</dependency>
 		
 		<!-- 
 		Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
@@ -38,11 +42,6 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 	</dependencies>
 

@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import cz.cestadomu.hospis.model.Schema;
+
 @Component
 public class MainRouter {
 
@@ -67,8 +69,7 @@ public class MainRouter {
 		public RoutingItem(final String routeTo, final String schema) {
 			this.routeTo = routeTo;
 			try {
-				this.validator =
-						MainRouter.this.factory.newSchema(getClass().getResource(schema)).newValidator();
+				this.validator = factory.newSchema(Schema.class.getResource(schema)).newValidator();
 			} catch (final SAXException e) {
 				throw new RuntimeException("New route item init failed.", e);
 			}
