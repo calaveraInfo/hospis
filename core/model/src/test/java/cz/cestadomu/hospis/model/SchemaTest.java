@@ -22,19 +22,19 @@ public class SchemaTest {
 
 	@Test
 	public void credentialsTest() throws SAXException, IOException {
-		schemaFactory.newSchema(Schema.CREDENTIALS.resourceUrl()).newValidator()
+		schemaFactory.newSchema(Schema.LOGIN_REQUEST_SCHEMA.resourceUrl()).newValidator()
 				.validate(new StreamSource(Mock.CLIENT_LOGIN_REQUEST_MOCK.resourceStream()));
 	}
 
 	@Test
 	public void employeeTest() throws SAXException, IOException {
-		schemaFactory.newSchema(Schema.EMPLOYEE.resourceUrl()).newValidator()
+		schemaFactory.newSchema(Schema.GET_OBJECT_INFO_EMPLOYEE_RESPONSE_SCHEMA.resourceUrl()).newValidator()
 				.validate(new StreamSource(Mock.CLIENT_GET_VIEW_X_EMPLOYEE_RESPONSE_MOCK.resourceStream()));
 	}
 
 	@Test
 	public void employeesTest() throws SAXException, IOException {
-		schemaFactory.newSchema(Schema.EMPLOYEES.resourceUrl()).newValidator()
+		schemaFactory.newSchema(Schema.GET_VIEW_X_EMPLOYEES_RESPONSE_SCHEMA.resourceUrl()).newValidator()
 				.validate(new StreamSource(Mock.CLIENT_GET_VIEW_X_EMPLOYEES_RESPONSE_MOCK.resourceStream()));
 	}
 
@@ -44,7 +44,7 @@ public class SchemaTest {
 	 */
 	@Test(expected = SAXParseException.class)
 	public void transitiveLeakTest() throws SAXException, IOException {
-		schemaFactory.newSchema(Schema.EMPLOYEE.resourceUrl()).newValidator()
+		schemaFactory.newSchema(Schema.GET_OBJECT_INFO_EMPLOYEE_RESPONSE_SCHEMA.resourceUrl()).newValidator()
 				.validate(new StreamSource(Mock.CLIENT_GET_VIEW_X_EMPLOYEES_RESPONSE_MOCK.resourceStream()));
 	}
 }

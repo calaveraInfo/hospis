@@ -45,11 +45,11 @@
 	</bean>
 
 	<oxm:jaxb2-marshaller id="marshaller">
-		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Greeting"/>
-		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Credentials"/>
-		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.AuthenticationResult"/>
-		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.Employees"/>
-		<oxm:class-to-be-bound name="cz.cestadomu.hospis.model.GetViewX"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.rest.lib.model.Greeting"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.rest.lib.model.Credentials"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.rest.lib.model.AuthenticationResult"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.rest.lib.model.Employees"/>
+		<oxm:class-to-be-bound name="cz.cestadomu.hospis.rest.lib.model.GetViewX"/>
 	</oxm:jaxb2-marshaller>
 
 	<amq:queue id="restRequest" physicalName="org.apache.activemq.spring.Test.spring.restRequests" />

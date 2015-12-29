@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cz.cestadomu.hospis.model.Greeting;
 import cz.cestadomu.hospis.rest.lib.gateway.TestGateway;
+import cz.cestadomu.hospis.rest.lib.model.Greeting;
 import cz.cestadomu.hospis.rest.lib.model.Test;
 
 @RestController

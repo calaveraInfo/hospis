@@ -74,16 +74,7 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-spring</artifactId>
 		</dependency>
-
-		<!--
-			Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
-		-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
+		
 		<!--
 			http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/
 			74.1 Create a deployable war file
@@ -99,68 +90,25 @@
 		</dependency>
 
 		<!--
-			Contains Hospis core module data model.
+			Contains test related dependencies like @RunWith, @WebAppConfiguration etc.
 		-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>cz.cestadomu.hospis</groupId>
+			<artifactId>core-mock</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>cz.cestadomu.hospis</groupId>
 			<artifactId>core-model</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-           		<!-- 
-           		When Eclipse resolve a dependency to one of it's projects, the unpack goal fails because it
-           		expects a jar but Eclipse give it a plain directory. See
-           		https://issues.apache.org/jira/browse/MDEP-98 and other linked issues.
-           		As of today, there is no way how to do this right in Eclipse, although some attempts exist:
-           		https://github.com/ianbrandt/m2e-maven-dependency-plugin
-           		Nevertheless the recommended setup is to disable workspace resolution
-           		(right click on project -> Maven -> Disable workspace resolution) and if needed, explicitly
-           		setup Eclipse to run this plugin in lifecycle-mapping-metadata.xml:
-           		https://www.eclipse.org/m2e/documentation/m2e-execution-not-covered.html
-           		(example should be in the root directory of this repository)
-           		Hopefully this will be fixed in some future releases of dependency plugin itself
-           		http://wiki.eclipse.org/M2E_compatible_maven_plugins
-           		 -->
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack-core-model</id>
-						<phase>initialize</phase>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeArtifactIds>core-model</includeArtifactIds>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.jvnet.jaxb2.maven2</groupId>
-				<artifactId>maven-jaxb2-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>generate-core-model</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<schemaDirectory>${project.build.directory}/dependency/schema</schemaDirectory>
-					<schemaIncludes>
-						<include>**/*.xsd</include>
-					</schemaIncludes>
-					<bindingDirectory>src/main/resources/bindings</bindingDirectory>
-					<bindingIncludes>
-						<bindingInclude>global-bindings.xjb</bindingInclude>
-					</bindingIncludes>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project>

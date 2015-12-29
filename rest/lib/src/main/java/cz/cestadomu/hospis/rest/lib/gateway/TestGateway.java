@@ -1,6 +1,6 @@
 package cz.cestadomu.hospis.rest.lib.gateway;
 
-import cz.cestadomu.hospis.model.Greeting;
+import cz.cestadomu.hospis.rest.lib.model.Greeting;
 
 public interface TestGateway {
 

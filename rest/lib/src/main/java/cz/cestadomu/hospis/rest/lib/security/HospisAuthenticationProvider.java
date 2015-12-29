@@ -10,9 +10,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import cz.cestadomu.hospis.model.AuthenticationResult;
-import cz.cestadomu.hospis.model.Credentials;
 import cz.cestadomu.hospis.rest.lib.gateway.AuthenticationGateway;
+import cz.cestadomu.hospis.rest.lib.model.AuthenticationResult;
+import cz.cestadomu.hospis.rest.lib.model.Credentials;
 
 @Component
 public class HospisAuthenticationProvider implements AuthenticationProvider {
