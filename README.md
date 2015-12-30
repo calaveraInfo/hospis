@@ -6,6 +6,7 @@ Asynchronous messaging integration layer for systems and applications used in ho
 
 * [Blog](http://hospisdev.tumblr.com/)
 * [Documentation](http://www.googledrive.com/host/0B1pxZj5GslL_fjlKZS1icHk4YzQxMXFIRExpazAxNlFvWmFNRklIT01nV0U3RXNMSzlXOXc/index.html)
+* [OpenHub (project metainfo)](https://www.openhub.net/p/hospis)
 
 #Prerequisites
 
