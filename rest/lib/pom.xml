@@ -98,12 +98,14 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- For the reason of this dependency see profile generate-model. -->
 		<dependency>
 			<groupId>cz.cestadomu.hospis</groupId>
 			<artifactId>core-mock</artifactId>
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- For the reason of this dependency see profile generate-model. -->
 		<dependency>
 			<groupId>cz.cestadomu.hospis</groupId>
 			<artifactId>core-model</artifactId>
@@ -111,4 +113,68 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>generate-model</id>
+			<!-- This profile generates Java model from core-model schema files
+				in ${project.build.directory}/generated-sources/xjc.
+				These classes can be used (copypasted) as a basis for this module's
+				own model.
+				
+				In other words, this project does not have a layer with generated
+				model and instead it maps it's own model to the contract of the
+				core module and this profile is helping in doing it. Note that
+				the absence of generated model has to be compensated by checking
+				compatibility of such mapping with the original contract in test!
+			-->
+			<dependencies>
+				<dependency>
+					<groupId>cz.cestadomu.hospis</groupId>
+					<artifactId>core-model</artifactId>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>unpack-core-model</id>
+								<phase>initialize</phase>
+								<goals>
+									<goal>unpack-dependencies</goal>
+								</goals>
+								<configuration>
+									<includeArtifactIds>core-model</includeArtifactIds>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.jvnet.jaxb2.maven2</groupId>
+						<artifactId>maven-jaxb2-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>generate-core-model</id>
+								<phase>generate-sources</phase>
+								<goals>
+									<goal>generate</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<schemaDirectory>${project.build.directory}/dependency/schema</schemaDirectory>
+							<schemaIncludes>
+								<include>**/*.xsd</include>
+							</schemaIncludes>
+							<bindingDirectory>src/main/resources/bindings</bindingDirectory>
+							<bindingIncludes>
+								<bindingInclude>global-bindings.xjb</bindingInclude>
+							</bindingIncludes>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
