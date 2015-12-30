@@ -170,6 +170,15 @@
 	
 	<profiles>
 		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<spring.profiles.active></spring.profiles.active>
+			</properties>
+		</profile>
+		<profile>
 			<id>war</id>
 			<dependencies>
 				<!--
@@ -189,6 +198,9 @@
 		</profile>
 		<profile>
 			<id>mock</id>
+			<properties>
+				<spring.profiles.active>mock</spring.profiles.active>
+			</properties>
 			<dependencies>
 				<dependency>
 					<groupId>cz.cestadomu.hospis</groupId>
