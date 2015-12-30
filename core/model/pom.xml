@@ -30,28 +30,35 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>schemagen</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<includes>
-								<include>cz/cestadomu/hospis/model/prototype/*.java</include>
-							</includes>
-							<outputDirectory>${project.build.directory}/schemas</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
+	
+	<profiles>
+		<profile>
+			<id>generate-schema</id>
+			<!-- This profile generates XSD schema of classes in package
+				cz.cestadomu.hospis.model.prototype. Generated schema can be used as a
+				guideline or checker for the final one. -->
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>jaxb2-maven-plugin</artifactId>
+						<executions>
+							<execution>
+								<goals>
+									<goal>schemagen</goal>
+								</goals>
+								<phase>generate-resources</phase>
+								<configuration>
+									<includes>
+										<include>cz/cestadomu/hospis/model/prototype/*.java</include>
+									</includes>
+									<outputDirectory>${project.build.directory}/schemas</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
